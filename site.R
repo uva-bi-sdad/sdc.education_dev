@@ -35,11 +35,54 @@ page_section(
     {
       files <- c("block_group", "tract", "county")
       files <- structure(paste0(files, ".csv.xz"), names = files)
-      if (file.exists("docs/map.geojson")) output_map(
+      layers <- lapply(paste0("docs/", list.files("docs", "^points_")), function(f) list(
+        url = f, time = as.numeric(gsub("[^0-9]", "", f))
+      ))
+      if (file.exists("docs/map_2010.geojson")) output_map(
         list(
-          name = names(files[which(file.exists(paste0("docs/data/", files)))[1]]),
-          url = "docs/map.geojson",
-          id_property = "geoid"
+          list(
+            name = names(files[which(file.exists(paste0("docs/data/", files)))[1]]),
+            time = 2010,
+            url = "docs/map_2010.geojson",
+            id_property = "geoid"
+          ),
+          list(
+            name = names(files[which(file.exists(paste0("docs/data/", files)))[1]]),
+            time = 2020,
+            url = "docs/map_2020.geojson",
+            id_property = "geoid"
+          )
+        ),
+        overlays = c(list(
+            list(
+              variable = "nces:schools_2year_per_100k",
+              source = layers,
+              filter = list(feature = "ICLEVEL", operator = "=", value = 2)
+            ),
+            list(
+              variable = "nces:schools_under2year_per_100k",
+              source = layers,
+              filter = list(feature = "ICLEVEL", operator = "=", value = 3)
+            ),
+            list(
+              variable = "nces:schools_2year_min_drivetime",
+              source = layers,
+              filter = list(feature = "ICLEVEL", operator = "=", value = 2)
+            ),
+            list(
+              variable = "nces:schools_under2year_min_drivetime",
+              source = layers,
+              filter = list(feature = "ICLEVEL", operator = "=", value = 3)
+            )
+          ),
+          lapply(c("biomedical", "computer", "engineering", "physical", "science"), function(p) list(
+            variable = paste0("nces:schools_2year_with_", p, "_program_per_100k"),
+            source = layers,
+            filter = list(
+              list(feature = "ICLEVEL", operator = "=", value = 2),
+              list(feature = p, operator = "=", value = 1)
+            )
+          ))
         ),
         id = "main_map",
         subto = c("main_plot", "main_legend"),

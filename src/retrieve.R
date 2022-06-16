@@ -1,6 +1,8 @@
 library(parallel)
 library(jsonlite)
+library(sf)
 
+dir.create("docs", FALSE)
 dir.create("data/original", FALSE)
 dir.create("data/original/shapes", FALSE)
 
@@ -25,10 +27,10 @@ process_year <- function(year, dir = "data/original", districts = county_distric
   library(catchment)
   library(sf)
   library(osrm)
-  message(year, "starting")
+  message(year, " starting")
   results_file <- paste0("data/working/nces_", year, ".csv.xz")
   block_groups <- if (file.exists(results_file)) {
-    message(year, "loading existing file")
+    message(year, " loading existing file")
     read.csv(gzfile(results_file), check.names = FALSE)
   } else {
     #
@@ -37,7 +39,7 @@ process_year <- function(year, dir = "data/original", districts = county_distric
     # get population data
     pop_file <- paste0(dir, "/population", year)
     dir.create(pop_file, FALSE)
-    message(year, "preparing population data")
+    message(year, " preparing population data")
     population <- do.call(rbind, lapply(states, function(s) {
       pop <- download_census_population(pop_file, s, year)$estimates
       pop$GEOID <- as.character(pop$GEOID)
@@ -60,7 +62,7 @@ process_year <- function(year, dir = "data/original", districts = county_distric
       institutions = paste0("https://nces.ed.gov/ipeds/datacenter/data/HD", year, ".zip"),
       completion = paste0("https://nces.ed.gov/ipeds/datacenter/data/C", year, "_A.zip")
     )
-    message(year, "preparing school data")
+    message(year, " preparing school data")
     data <- lapply(files, function(f) {
       df <- paste0(dir, "/", basename(f))
       if (!file.exists(df)) download.file(f, df)
@@ -86,15 +88,28 @@ process_year <- function(year, dir = "data/original", districts = county_distric
       programs, function(p) unique(data$completion[grepl(p, data$completion$CIPCODE), "UNITID"])
     )
     providers <- data$institutions[, c("UNITID", "LONGITUD", "LATITUDE", "ICLEVEL")]
-    colnames(providers) <- c("GEOID", "X", "Y", "type")
-    providers$GEOID <- as.character(providers$GEOID)
+    for (p in names(data$by_program)) {
+      providers[, p] <- as.integer(providers$ICLEVEL == 2 & providers$UNITID %in% data$by_program[[p]])
+    }
+    providers$UNITID <- as.character(providers$UNITID)
+    providers$LONGITUD <- as.numeric(providers$LONGITUD)
+    providers$LATITUDE <- as.numeric(providers$LATITUDE)
+    # write location files
+    out <- paste0("docs/points_", year, ".geojson")
+    unlink(out)
+    write_sf(st_as_sf(data.frame(
+      providers[, -(2:3)],
+      X = round(providers$LONGITUD, 6),
+      Y = round(providers$LATITUDE, 6)
+    ), coords = c("X", "Y")), out)
+    colnames(providers)[1:4] <- c("GEOID", "X", "Y", "type")
     # calculate travel times
     cost_file <- paste0("data/working/traveltimes_", year, ".csv.xz")
     if (file.exists(cost_file)) {
-      message(year, "loading existing travel times")
+      message(year, " loading existing travel times")
       traveltimes <- read.csv(gzfile(cost_file), row.names = 1, check.names = FALSE)
     } else {
-      message(year, "requesting travel times")
+      message(year, " requesting travel times")
       options(osrm.server = Sys.getenv("OSRM_SERVER"))
       traveltimes <- osrmTable(
         src = population[, c("GEOID", "X", "Y")],
@@ -109,7 +124,7 @@ process_year <- function(year, dir = "data/original", districts = county_distric
     #
     # calculate outputs
     #
-    message(year, "calculating measures")
+    message(year, " calculating measures")
     # get minimum travel times
     population$schools_2year_min_drivetime <- apply(
       traveltimes[, providers[providers$type == 2, "GEOID"]], 1, min, na.rm = TRUE
@@ -131,7 +146,7 @@ process_year <- function(year, dir = "data/original", districts = county_distric
     )
     for (p in names(data$by_program)) {
       population[[paste0("schools_2year_with_", p, "_program_per_100k")]] <- catchment_ratio(
-        population, providers[providers$type == 2 & providers$GEOID %in% data$by_program[[p]], ],
+        population, providers[providers[[p]] == 1, ],
         traveltimes,
         weight = "gaussian", scale = 18, normalize_weight = TRUE, return_type = 1e5,
         consumers_value = "population_over_14"
@@ -158,7 +173,7 @@ process_year <- function(year, dir = "data/original", districts = county_distric
     ))
     res
   }
-  message(year, "creating aggregates")
+  message(year, " creating aggregates")
   list(
     block_groups = block_groups,
     tracts = do.call(rbind, lapply(split(block_groups, substring(block_groups$GEOID, 1, 11)), agger, 11)),
@@ -227,12 +242,31 @@ final <- do.call(rbind, lapply(data, function(d) {
 
 write.csv(final, xzfile("data/distribution/nces.csv.xz"), row.names = FALSE)
 
-# make special map
-write_json(list(
-  type = "FeatureCollection",
-  crs = list(type = "name", properties = list(name = "urn:ogc:def:crs:OGC:1.3:CRS84")),
-  features = unlist(lapply(
-    list.files("data/original/reference_shapes", "block_groups_2010", full.names = TRUE),
-    function(f) Filter(function(e) e$properties$geoid %in% final$geoid, read_json(f)$features)
-  ), FALSE, FALSE)
-), "docs/map.geojson", auto_unbox = TRUE)
+# make special maps
+if (!file.exists("docs/map_2010.geojson")) {
+  st_write(
+    rmapshaper::ms_simplify(st_read(toJSON(list(
+      type = "FeatureCollection",
+      crs = list(type = "name", properties = list(name = "urn:ogc:def:crs:OGC:1.3:CRS84")),
+      features = unlist(lapply(
+        list.files("data/original/reference_shapes", "block_groups_2010", full.names = TRUE),
+        function(f) Filter(function(e) e$properties$geoid %in% final$geoid, read_json(f)$features)
+      ), FALSE, FALSE)
+    ), auto_unbox = TRUE), quiet = TRUE), keep_shapes = TRUE),
+    "docs/map_2010.geojson"
+  )
+}
+
+if (!file.exists("docs/map_2020.geojson")) {
+  st_write(
+    rmapshaper::ms_simplify(st_read(toJSON(list(
+      type = "FeatureCollection",
+      crs = list(type = "name", properties = list(name = "urn:ogc:def:crs:OGC:1.3:CRS84")),
+      features = unlist(lapply(
+        list.files("data/original/reference_shapes", "block_groups_2020", full.names = TRUE),
+        function(f) Filter(function(e) e$properties$geoid %in% final$geoid, read_json(f)$features)
+      ), FALSE, FALSE)
+    ), auto_unbox = TRUE), quiet = TRUE), keep_shapes = TRUE),
+    "docs/map_2020.geojson"
+  )
+}

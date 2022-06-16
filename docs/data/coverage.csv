@@ -1,0 +1,12 @@
+"","metadata","block_group","tract","county","health_district"
+"ID",0,74656,26288,1104,296
+"nces:schools_2year_min_drivetime",1,58283,21167,1104,296
+"nces:schools_2year_per_100k",1,58283,21167,1104,296
+"nces:schools_2year_with_biomedical_program_per_100k",1,58283,21167,1104,296
+"nces:schools_2year_with_computer_program_per_100k",1,58283,21167,1104,296
+"nces:schools_2year_with_engineering_program_per_100k",1,58283,21167,1104,296
+"nces:schools_2year_with_physical_program_per_100k",1,58283,21167,1104,296
+"nces:schools_2year_with_science_program_per_100k",1,58283,21167,1104,296
+"nces:schools_under2year_min_drivetime",1,58283,21167,1104,296
+"nces:schools_under2year_per_100k",1,58283,21167,1104,296
+"time",0,74656,26288,1104,296
