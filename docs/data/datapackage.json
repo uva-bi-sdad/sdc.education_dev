@@ -9,9 +9,9 @@
   },
   "resources": [
     {
-      "bytes": 2510504,
+      "bytes": 3272700,
       "encoding": "ISO-8859-1",
-      "md5": "1d2f99230d3a955d83f405bd68d79528",
+      "md5": "ba4f2a78e306a3160ed7fb6fd28acf9d",
       "format": "education/docs/data/block_group",
       "name": "block_group",
       "filename": "block_group.csv.xz",
@@ -24,7 +24,7 @@
       ],
       "time": "time",
       "profile": "data-resource",
-      "created": "2022-06-16 05:12:53",
+      "created": "2022-06-24 01:20:21",
       "last_modified": "2022-05-15 23:31:25",
       "row_count": 74656,
       "entity_count": 9332,
@@ -47,11 +47,14 @@
           },
           {
             "name": "nces:schools_2year_min_drivetime",
-            "duplicates": 73905,
+            "duplicates": 73898,
             "time_range": [0, 7],
             "type": "float",
-            "missing": 16398,
-            "min": 0,
+            "missing": 16373,
+            "mean": 19.4294,
+            "sd": 14.2203,
+            "min": 0.3,
+            "max": 94.7,
             "info": {
               "category": "Education",
               "full_name": "nces:schools_2year_min_drivetime",
@@ -82,11 +85,14 @@
           },
           {
             "name": "nces:schools_under2year_min_drivetime",
-            "duplicates": 73650,
+            "duplicates": 73507,
             "time_range": [0, 7],
             "type": "float",
-            "missing": 16398,
-            "min": 0,
+            "missing": 16373,
+            "mean": 24.2778,
+            "sd": 23.2988,
+            "min": 0.1,
+            "max": 145.9,
             "info": {
               "category": "Education",
               "full_name": "nces:schools_under2year_min_drivetime",
@@ -117,14 +123,14 @@
           },
           {
             "name": "nces:schools_2year_per_100k",
-            "duplicates": 30206,
+            "duplicates": 16376,
             "time_range": [0, 7],
             "type": "float",
             "missing": 16373,
-            "mean": 0.8127,
-            "sd": 0.87,
+            "mean": 0.7874,
+            "sd": 0.9444,
             "min": 0,
-            "max": 10.8771,
+            "max": 10.2641,
             "info": {
               "category": "Education",
               "full_name": "nces:schools_2year_per_100k",
@@ -162,14 +168,14 @@
           },
           {
             "name": "nces:schools_under2year_per_100k",
-            "duplicates": 30206,
+            "duplicates": 16375,
             "time_range": [0, 7],
             "type": "float",
             "missing": 16373,
-            "mean": 0.6598,
-            "sd": 0.5175,
+            "mean": 0.6562,
+            "sd": 0.5492,
             "min": 0,
-            "max": 3.9871,
+            "max": 3.8891,
             "info": {
               "category": "Education",
               "full_name": "nces:schools_under2year_per_100k",
@@ -207,14 +213,14 @@
           },
           {
             "name": "nces:schools_2year_with_biomedical_program_per_100k",
-            "duplicates": 30206,
+            "duplicates": 16375,
             "time_range": [0, 7],
             "type": "float",
             "missing": 16373,
-            "mean": 0.0271,
-            "sd": 0.0788,
+            "mean": 0.0075,
+            "sd": 0.0735,
             "min": 0,
-            "max": 2.4144,
+            "max": 3.8057,
             "info": {
               "category": "Education",
               "full_name": "nces:schools_2year_with_biomedical_program_per_100k",
@@ -252,14 +258,14 @@
           },
           {
             "name": "nces:schools_2year_with_computer_program_per_100k",
-            "duplicates": 30206,
+            "duplicates": 16375,
             "time_range": [0, 7],
             "type": "float",
             "missing": 16373,
-            "mean": 0.4745,
-            "sd": 0.7745,
+            "mean": 0.456,
+            "sd": 0.8257,
             "min": 0,
-            "max": 10.8768,
+            "max": 10.2641,
             "info": {
               "category": "Education",
               "full_name": "nces:schools_2year_with_computer_program_per_100k",
@@ -297,14 +303,14 @@
           },
           {
             "name": "nces:schools_2year_with_engineering_program_per_100k",
-            "duplicates": 30206,
+            "duplicates": 16376,
             "time_range": [0, 7],
             "type": "float",
             "missing": 16373,
-            "mean": 0.4336,
-            "sd": 0.8157,
+            "mean": 0.4145,
+            "sd": 0.8702,
             "min": 0,
-            "max": 10.8768,
+            "max": 10.2641,
             "info": {
               "category": "Education",
               "full_name": "nces:schools_2year_with_engineering_program_per_100k",
@@ -342,14 +348,14 @@
           },
           {
             "name": "nces:schools_2year_with_physical_program_per_100k",
-            "duplicates": 30214,
+            "duplicates": 16390,
             "time_range": [0, 7],
             "type": "float",
             "missing": 16373,
-            "mean": 0.034,
-            "sd": 0.1338,
+            "mean": 0.015,
+            "sd": 0.1308,
             "min": 0,
-            "max": 2.8991,
+            "max": 2.818,
             "info": {
               "category": "Education",
               "full_name": "nces:schools_2year_with_physical_program_per_100k",
@@ -387,14 +393,14 @@
           },
           {
             "name": "nces:schools_2year_with_science_program_per_100k",
-            "duplicates": 30206,
+            "duplicates": 16376,
             "time_range": [0, 7],
             "type": "float",
             "missing": 16373,
-            "mean": 0.0645,
-            "sd": 0.1784,
+            "mean": 0.0683,
+            "sd": 0.2063,
             "min": 0,
-            "max": 5.6647,
+            "max": 5.7351,
             "info": {
               "category": "Education",
               "full_name": "nces:schools_2year_with_science_program_per_100k",
@@ -469,7 +475,7 @@
           "url": "https://github.com/uva-bi-sdad/catchment"
         }
       },
-      "sha512": "df6b102c019fe74636052478d37bf3f7ddfa5da10fc5d0f0b1816d94da3de7a7e42997115dc5dadaae088ac69bd470486eea3a7c915ef1e8f0ef3136c4fb2114"
+      "sha512": "32551062f7617cc7cf5e4d104b325529e6164935c4c60d831fae5766b859bc5cd1f0b03c0412e1536f349783193770a74a05b18c0c41df588f9bb808bc035b59"
     }
   ]
 }

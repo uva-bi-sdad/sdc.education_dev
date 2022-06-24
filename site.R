@@ -13,7 +13,7 @@ page_section(
         "Variable", options = "variables", default = 1,
         id = "selected_variable"
       ),
-      input_number("Time", variable = "time", default = 2019, id = "selected_time")
+      input_number("Time", variable = "time", default = "last", id = "selected_time")
     ),
     output_legend(id = "main_legend", subto = c("main_map", "main_plot")),
     output_info(

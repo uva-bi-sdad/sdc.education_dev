@@ -16,6 +16,6 @@ data_add(
   refresh = TRUE
 )
 
-site_build(".", version = "dev", serve = TRUE, options = list(
+site_build(".", serve = TRUE, options = list(
   polygon_outline = .5, color_scale_center = "median"
 ))

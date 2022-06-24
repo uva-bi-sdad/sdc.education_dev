@@ -44,7 +44,7 @@ process_year <- function(year, dir = "data/original", districts = county_distric
       pop <- download_census_population(pop_file, s, year)$estimates
       pop$GEOID <- as.character(pop$GEOID)
       rownames(pop) <- pop$GEOID
-      shapes <- download_census_shapes("data/original/shapes", s, "bg", year = year)
+      shapes <- download_census_shapes("data/original/shapes", s, "bg", year = if (year < 2014) 2014 else year)
       rownames(shapes) <- shapes$GEOID
       IDs <- union(pop$GEOID, shapes$GEOID)
       data.frame(
@@ -115,6 +115,7 @@ process_year <- function(year, dir = "data/original", districts = county_distric
         src = population[, c("GEOID", "X", "Y")],
         dst = providers[, 1:3]
       )$duration
+      if (is.null(traveltimes)) stop("failed to calculate travel times")
       write.csv(
         cbind(GEOID = rownames(traveltimes), as.data.frame(as.matrix(traveltimes))),
         xzfile(cost_file),
@@ -183,6 +184,7 @@ process_year <- function(year, dir = "data/original", districts = county_distric
 }
 
 # run for each year
+## may need to run sequentially when first calculating travel times
 cl <- makeCluster(min(2020 - 2013, detectCores() - 1))
 on.exit(stopCluster(cl))
 clusterExport(cl, "county_districts")
