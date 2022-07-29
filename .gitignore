@@ -1,11 +1,11 @@
 .Rproj.user
 .Rhistory
-.Rdata
+.RData
 .httr-oauth
 .DS_Store
 .netlify
 *.Rproj
 node_modules
 package-lock.json
-docs/dist
-data/original
+dist
+original
