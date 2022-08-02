@@ -1,0 +1,246 @@
+---
+title: "perc_post_hs_edu_ncr"
+output: html_document
+---
+
+```{r}
+# R imports - might have to install some
+library(sf)
+library(tidyverse)
+library(tmap)
+library(tmaptools)
+library(tidycensus)
+library(tigris)
+library(rmapshaper)
+library(matrixStats)
+library(SpatialAcc)
+library(reticulate)
+
+library(tidygeocoder)
+library(osrm)
+```
+
+# VDH
+
+```{r}
+tract_data <- matrix(, nrow = 0, ncol = 8)
+county_data <- matrix(, nrow = 0, ncol = 8)
+hd_data <- matrix(, nrow = 0, ncol = 8)
+for (i in 2010:2019)
+{
+  # tracts
+  va.tr.post_edu <- get_acs(geography = "tract",
+                            year = i,
+                            variables = c(tpop = "B06009_001",
+                                          some_college = "B06009_004",
+                                          bach = "B06009_005",
+                                          grad_prof = "B06009_006"),
+                            state = "VA",
+                            survey = "acs5",
+                            output = "wide",
+                            geometry = F)
+  
+  va.tr.post_edu <- va.tr.post_edu %>%
+    mutate(perc_post_hs_edu = (some_collegeE + bachE + grad_profE) / tpopE,
+           num_post_hs_edu = some_collegeE + bachE + grad_profE) %>%
+    select(-c(tpopE, tpopM, some_collegeE, some_collegeM, bachE, bachM, grad_profE, grad_profM))
+  
+  # counties
+  va.ct.post_edu <- get_acs(geography = "county",
+                            year = i,
+                            variables = c(tpop = "B06009_001", # number respondents to these quetions?
+                                          some_college = "B06009_004",
+                                          bach = "B06009_005",
+                                          grad_prof = "B06009_006"),
+                            state = "VA",
+                            survey = "acs5",
+                            output = "wide",
+                            geometry = F)
+  
+  va.ct.post_edu <- va.ct.post_edu %>%
+    mutate(perc_post_hs_edu = (some_collegeE + bachE + grad_profE) / tpopE,
+           num_post_hs_edu = some_collegeE + bachE + grad_profE) %>%
+    select(-c(tpopE, tpopM, some_collegeE, some_collegeM, bachE, bachM, grad_profE, grad_profM))
+  
+  # health districts
+  con <- get_db_conn(db_pass = "rsu8zvrsu8zv")
+  health_district_counties <- st_read(con, query = "SELECT * FROM dc_common.va_hdct_sdad_2021_health_district_counties")
+  DBI::dbDisconnect(con)
+  
+  va.hd.post_edu <- get_acs(geography = "county",
+                              year = i,
+                              variables = c(tpop = "B06009_001", # number respondents to these quetions?
+                                            some_college = "B06009_004",
+                                            bach = "B06009_005",
+                                            grad_prof = "B06009_006"),
+                              state = "VA",
+                              survey = "acs5",
+                              output = "wide",
+                              geometry = F)
+  
+  va.hd.post_edu <- va.hd.post_edu %>%
+    merge(health_district_counties[, c("geoid_county", "region_name", "geoid")], by.x = "GEOID", by.y = "geoid_county") %>%
+    group_by(region_name) %>%
+    summarise(tpopE = sum(tpopE),
+              some_collegeE = sum(some_collegeE),
+              bachE = sum(bachE),
+              grad_profE = sum(grad_profE)) %>%
+    mutate(perc_post_hs_edu = (some_collegeE + bachE + grad_profE) / tpopE,
+           num_post_hs_edu = some_collegeE + bachE + grad_profE) %>%
+    select(region_name, perc_post_hs_edu, num_post_hs_edu) %>%
+    merge(health_district_counties[, c("region_name", "geoid")], by = "region_name", all.x = TRUE) %>%
+    rename(NAME = geoid)
+    
+  va.hd.post_edu <- va.hd.post_edu[!duplicated(va.hd.post_edu),]
+  
+  va.tr.post_edu.2 <- va.tr.post_edu %>% 
+    gather(measure, value, c(perc_post_hs_edu, num_post_hs_edu)) %>%
+    rename(geoid = GEOID,
+           region_name = NAME) %>%
+    mutate(year = as.character(i),
+           measure_type = ifelse(measure == "perc_post_hs_edu", "percentage", "count"),
+           measure_units = as.character(NA),
+           region_type = "tract") %>%
+    relocate("geoid", "region_type", "region_name", "year", "measure", "value", "measure_type", "measure_units")
+  
+  va.ct.post_edu.2 <- va.ct.post_edu %>% 
+    gather(measure, value, c(perc_post_hs_edu, num_post_hs_edu)) %>%
+    rename(geoid = GEOID,
+           region_name = NAME) %>%
+    mutate(year = as.character(i),
+           measure_type = ifelse(measure == "perc_post_hs_edu", "percentage", "count"),
+           measure_units = as.character(NA),
+           region_type = "county") %>%
+    relocate("geoid", "region_type", "region_name", "year", "measure", "value", "measure_type", "measure_units")
+  
+  va.hd.post_edu.2 <- va.hd.post_edu %>% 
+    gather(measure, value, c(perc_post_hs_edu, num_post_hs_edu)) %>%
+    rename(geoid = NAME) %>%
+    mutate(year = as.character(i),
+           measure_type = ifelse(measure == "perc_post_hs_edu", "percentage", "count"),
+           measure_units = as.character(NA),
+           region_type = "health district") %>%
+    relocate("geoid", "region_type", "region_name", "year", "measure", "value", "measure_type", "measure_units")
+  
+  tract_data <- rbind(tract_data, va.tr.post_edu.2)
+  county_data <- rbind(county_data, va.ct.post_edu.2)
+  hd_data <- rbind(hd_data, va.hd.post_edu.2)
+}
+
+va.post_edu <- rbind(tract_data, county_data, hd_data)
+
+source("~/git/VDH/src/helper_functions.R")
+con <- get_db_conn(db_pass = "rsu8zvrsu8zv")
+dc_dbWriteTable(con, "dc_education_training", "va_hdcttr_acs_2010_2019_post_hs_education", va.post_edu)
+dbDisconnect(con)
+```
+
+# NCR
+
+```{r}
+# bg_data <- matrix(, nrow = 0, ncol = 8)
+tract_data <- matrix(, nrow = 0, ncol = 8)
+county_data <- matrix(, nrow = 0, ncol = 8)
+for (i in 2010:2019)
+{
+  # if (i > 2012)
+  # {
+  #   # block groups
+  #   dmv.bg.post_edu <- get_acs(geography = "block group",
+  #                             year = i,
+  #                             variables = c(tpop = "B06009_001",
+  #                                           some_college = "B06009_004",
+  #                                           bach = "B06009_005",
+  #                                           grad_prof = "B06009_006"),
+  #                             state = c("VA", "MD", "DC"),
+  #                             survey = "acs5",
+  #                             output = "wide",
+  #                             geometry = F)
+  #   
+  #   dmv.bg.post_edu <- dmv.bg.post_edu %>%
+  #     mutate(perc_post_hs_edu = (some_collegeE + bachE + grad_profE) / tpopE,
+  #            num_post_hs_edu = some_collegeE + bachE + grad_profE) %>%
+  #     select(-c(tpopE, tpopM, some_collegeE, some_collegeM, bachE, bachM, grad_profE, grad_profM))
+  #   
+  #   dmv.bg.post_edu.2 <- dmv.bg.post_edu %>% 
+  #   gather(measure, value, c(perc_post_hs_edu, num_post_hs_edu)) %>%
+  #   rename(geoid = GEOID,
+  #          region_name = NAME) %>%
+  #   mutate(year = as.character(i),
+  #          measure_type = ifelse(measure == "perc_post_hs_edu", "percentage", "count"),
+  #          measure_units = as.character(NA),
+  #          region_type = "block group") %>%
+  #   relocate("geoid", "region_type", "region_name", "year", "measure", "value", "measure_type", "measure_units")
+  #   
+  #   bg_data <- rbind(bg_data, dmv.bg.post_edu.2)
+  # }
+  
+  # tracts
+  dmv.tr.post_edu <- get_acs(geography = "tract",
+                            year = i,
+                            variables = c(tpop = "B06009_001",
+                                          some_college = "B06009_004",
+                                          bach = "B06009_005",
+                                          grad_prof = "B06009_006"),
+                            state = c("VA", "MD", "DC"),
+                            survey = "acs5",
+                            output = "wide",
+                            geometry = F)
+  
+  dmv.tr.post_edu <- dmv.tr.post_edu %>%
+    mutate(perc_post_hs_edu = (some_collegeE + bachE + grad_profE) / tpopE,
+           num_post_hs_edu = some_collegeE + bachE + grad_profE) %>%
+    select(-c(tpopE, tpopM, some_collegeE, some_collegeM, bachE, bachM, grad_profE, grad_profM))
+  
+  # counties
+  dmv.ct.post_edu <- get_acs(geography = "county",
+                            year = i,
+                            variables = c(tpop = "B06009_001", # number respondents to these quetions?
+                                          some_college = "B06009_004",
+                                          bach = "B06009_005",
+                                          grad_prof = "B06009_006"),
+                            state = c("VA", "MD", "DC"),
+                            survey = "acs5",
+                            output = "wide",
+                            geometry = F)
+  
+  dmv.ct.post_edu <- dmv.ct.post_edu %>%
+    mutate(perc_post_hs_edu = (some_collegeE + bachE + grad_profE) / tpopE,
+           num_post_hs_edu = some_collegeE + bachE + grad_profE) %>%
+    select(-c(tpopE, tpopM, some_collegeE, some_collegeM, bachE, bachM, grad_profE, grad_profM))
+  
+  dmv.tr.post_edu.2 <- dmv.tr.post_edu %>% 
+    gather(measure, value, c(perc_post_hs_edu, num_post_hs_edu)) %>%
+    rename(geoid = GEOID,
+           region_name = NAME) %>%
+    mutate(year = as.character(i),
+           measure_type = ifelse(measure == "perc_post_hs_edu", "percentage", "count"),
+           measure_units = as.character(NA),
+           region_type = "tract") %>%
+    relocate("geoid", "region_type", "region_name", "year", "measure", "value", "measure_type", "measure_units")
+  
+  dmv.ct.post_edu.2 <- dmv.ct.post_edu %>% 
+    gather(measure, value, c(perc_post_hs_edu, num_post_hs_edu)) %>%
+    rename(geoid = GEOID,
+           region_name = NAME) %>%
+    mutate(year = as.character(i),
+           measure_type = ifelse(measure == "perc_post_hs_edu", "percentage", "count"),
+           measure_units = as.character(NA),
+           region_type = "county") %>%
+    relocate("geoid", "region_type", "region_name", "year", "measure", "value", "measure_type", "measure_units")
+  
+  tract_data <- rbind(tract_data, dmv.tr.post_edu.2)
+  county_data <- rbind(county_data, dmv.ct.post_edu.2)
+}
+
+# dmv.post_edu <- rbind(bg_data, tract_data, county_data)
+dmv.post_edu <- rbind(tract_data, county_data)
+ncr.post_edu <- dmv.post_edu[substr(dmv.post_edu$geoid, 1, 5) %in% c("51013", "51059", "51107", "51510", "51600", "51153", "51683", "51685", "51610", "11001", "24031", "24033", "24017", "24021"),] %>% drop_na(value)
+
+source("~/git/VDH/src/helper_functions.R")
+con <- get_db_conn(db_pass = "rsu8zvrsu8zv")
+dc_dbWriteTable(con, "dc_education_training", "ncr_cttr_acs_2010_2019_post_hs_education", ncr.post_edu)
+dbDisconnect(con)
+```
+
+

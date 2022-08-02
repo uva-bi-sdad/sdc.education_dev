@@ -12,15 +12,17 @@ if (length(agg_info)) write_json(
   agg_info, "docs/data/measure_info.json", auto_unbox = TRUE, pretty = TRUE
 )
 
-files <- c("block_group", "tract", "county")
-files <- structure(paste0(files, ".csv.xz"), names = files)
 data_add(
-  files[which(file.exists(paste0("docs/data/", files)))[1]],
-  meta = list(
+  c(
+    county = "county.csv.xz",
+    tract = "tract.csv.xz",
+    block_group = "block_group.csv.xz"
+  ),
+  meta = rep(list(list(
     ids = list(variable = "ID", map = "data/entity_info.json"),
     time = "time",
     variables = "docs/data/measure_info.json"
-  ),
+  )), 3),
   dir = "docs/data",
   clean = TRUE,
   refresh = TRUE

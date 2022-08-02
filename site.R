@@ -1,4 +1,14 @@
-input_dataview(id = "default_view", y = "selected_variable", time_agg = "selected_time")
+input_variable("shapes", list(
+  "selected_variable == 3rd_grade_mean_median_read_score:mean_read_pass_rate" = "county",
+  "selected_variable == 3rd_grade_mean_median_read_score:median_read_pass_rate" = "county",
+  "selected_variable == health_literacy_estimates:health_literacy_estimate" = "county",
+  "selected_variable == post_hs_education:num_post_hs_edu" = "tract",
+  "selected_variable == post_hs_education:perc_post_hs_edu" = "tract"
+), "block_group")
+
+input_dataview(
+  id = "default_view", y = "selected_variable", time_agg = "selected_time", dataset = "shapes"
+)
 
 page_section(
   wraps = "col", sizes = c(4, NA),
@@ -10,10 +20,10 @@ page_section(
     page_section(
       wraps = "col", sizes = c(NA, 1),
       input_select(
-        "Variable", options = "variables", default = 1,
+        "Variable", options = "variables", default = 2,
         id = "selected_variable"
       ),
-      input_number("Time", variable = "time", default = "last", id = "selected_time")
+      input_number("Time", min = "filter.time_min", max = "filter.time_max", default = "max", id = "selected_time")
     ),
     output_legend(id = "main_legend", subto = c("main_map", "main_plot")),
     output_info(
@@ -33,24 +43,54 @@ page_section(
   ),
   page_section(
     {
-      files <- c("block_group", "tract", "county")
-      files <- structure(paste0(files, ".csv.xz"), names = files)
       layers <- lapply(paste0("docs/", list.files("docs", "^points_")), function(f) list(
         url = f, time = as.numeric(gsub("[^0-9]", "", f))
       ))
-      if (file.exists("docs/map_2010.geojson")) output_map(
+      output_map(
         list(
           list(
-            name = names(files[which(file.exists(paste0("docs/data/", files)))[1]]),
+            name = "block_group",
             time = 2010,
             url = "docs/map_2010.geojson",
             id_property = "geoid"
           ),
           list(
-            name = names(files[which(file.exists(paste0("docs/data/", files)))[1]]),
+            name = "block_group",
             time = 2020,
             url = "docs/map_2020.geojson",
             id_property = "geoid"
+          ),
+          list(
+            name = "tract",
+            time = 2010,
+            url = paste0(
+              "https://raw.githubusercontent.com/uva-bi-sdad/dc.geographies/main/data/",
+              "va_geo_census_cb_2010_census_tracts/distribution/va_geo_census_cb_2010_census_tracts.geojson"
+            )
+          ),
+          list(
+            name = "county",
+            time = 2010,
+            url = paste0(
+              "https://raw.githubusercontent.com/uva-bi-sdad/dc.geographies/main/data/",
+              "va_geo_census_cb_2010_counties/distribution/va_geo_census_cb_2010_counties.geojson"
+            )
+          ),
+          list(
+            name = "tract",
+            time = 2020,
+            url = paste0(
+              "https://raw.githubusercontent.com/uva-bi-sdad/dc.geographies/main/data/",
+              "va_geo_census_cb_2020_census_tracts/distribution/va_geo_census_cb_2020_census_tracts.geojson"
+            )
+          ),
+          list(
+            name = "county",
+            time = 2020,
+            url = paste0(
+              "https://raw.githubusercontent.com/uva-bi-sdad/dc.geographies/main/data/",
+              "va_geo_census_cb_2020_counties/distribution/va_geo_census_cb_2020_counties.geojson"
+            )
           )
         ),
         overlays = c(list(
