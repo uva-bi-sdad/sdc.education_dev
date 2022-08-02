@@ -20,7 +20,7 @@ page_section(
     page_section(
       wraps = "col", sizes = c(NA, 1),
       input_select(
-        "Variable", options = "variables", default = 2,
+        "Variable", options = "variables", default = 5,
         id = "selected_variable"
       ),
       input_number("Time", min = "filter.time_min", max = "filter.time_max", default = "max", id = "selected_time")

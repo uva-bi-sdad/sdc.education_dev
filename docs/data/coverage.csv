@@ -1,6 +1,9 @@
 "","metadata","block_group","county","health_district","school_district","tract"
 "3rd_grade_mean_median_read_score:mean_read_pass_rate",1,0,254,140,232,0
 "3rd_grade_mean_median_read_score:median_read_pass_rate",1,0,254,140,232,0
+"daycare_access_scores:daycare_3sfca",1,5297,133,35,0,1866
+"daycare_access_scores:daycare_cnt",1,2740,133,35,0,1540
+"daycare_access_scores:daycare_median_drive_time_top5",1,5321,133,35,0,1899
 "health_literacy_estimates:health_literacy_estimate",1,0,133,35,0,1907
 "ID",0,111984,1668,864,1392,39468
 "nces:schools_2year_min_drivetime",1,58283,1104,296,0,21167

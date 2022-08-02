@@ -2,7 +2,7 @@ library(community)
 library(jsonlite)
 
 datasets <- paste0(list.dirs("data", recursive = FALSE), "/distribution")
-data_reformat_sdad(list.files(datasets, "\\.csv\\.xz$", full.names = TRUE), "docs/data")
+data_reformat_sdad(list.files(datasets, "\\.csv\\.[gbx]z2?$", full.names = TRUE), "docs/data")
 info <- lapply(list.files(datasets, "measure_info.*\\.json", full.names = TRUE), read_json)
 agg_info <- list()
 for (m in info) for (e in names(m)) {

@@ -9,9 +9,9 @@
   },
   "resources": [
     {
-      "bytes": 84996,
+      "bytes": 87344,
       "encoding": "ISO-8859-1",
-      "md5": "403ef1cfb39af0b1aa59a313c9d92fe9",
+      "md5": "a562644f6540f00a8592727ab9ff83be",
       "format": "education/docs/data/county",
       "name": "county",
       "filename": "county.csv.xz",
@@ -24,7 +24,7 @@
       ],
       "time": "time",
       "profile": "data-resource",
-      "created": "2022-08-01 21:16:31",
+      "created": "2022-08-01 22:55:58",
       "last_modified": "2022-05-15 23:31:32",
       "row_count": 1668,
       "entity_count": 139,
@@ -42,6 +42,102 @@
             "max": 2021,
             "info": {
               "sources": {},
+              "citations": {}
+            }
+          },
+          {
+            "name": "daycare_access_scores:daycare_cnt",
+            "duplicates": 1537,
+            "time_range": [11, 11],
+            "type": "integer",
+            "missing": 1535,
+            "mean": 2803.7594,
+            "sd": 7029.0683,
+            "min": 19,
+            "max": 64458,
+            "info": {
+              "category": "Education",
+              "measure_table": "dc_education_training.va_hdcttrbg_dss_2021_daycare_access_scores",
+              "full_name": "daycare_services_access_scores:daycare_cnt",
+              "measure": "daycare_cnt",
+              "type": "count",
+              "short_name": "Day care capacity",
+              "long_name": "Access to day care by capacity",
+              "short_description": "Count of day care capacity (seats) based on provider locations",
+              "long_description": "Count of day care capacity (seats) based on provider locations. Address and capacity data were collected from Virginia Department of Social Services day care search tool.",
+              "statement": "There are {value} daycare seats in {features.name}.",
+              "equity_category": "Availability",
+              "sources": [
+                {
+                  "name": "Virginia Department of Social Services",
+                  "date_accessed": 2021,
+                  "url": "https://www.dss.virginia.gov/facility/search/cc.cgi"
+                }
+              ],
+              "citations": {}
+            }
+          },
+          {
+            "name": "daycare_access_scores:daycare_3sfca",
+            "duplicates": 1534,
+            "time_range": [11, 11],
+            "type": "float",
+            "missing": 1535,
+            "mean": 3.0802,
+            "sd": 0.8641,
+            "min": 1.5868,
+            "max": 6.0075,
+            "info": {
+              "category": "Education",
+              "measure_table": "dc_education_training.va_hdcttrbg_dss_2021_daycare_access_scores",
+              "full_name": "daycare_access_scores:daycare_3sfca",
+              "measure": "daycare_3sfca",
+              "type": "index",
+              "short_name": "Day care geographic availability",
+              "long_name": "Day care geographic availability (3-step floating catchment area)",
+              "short_description": "Index of day care availability based on supply of and demand for providers",
+              "long_description": "Day care availability based on 3-step floating catchment areas. This method is an aggregation of day care facilities per population ratios weighted by distance or travel time in each catchment area (area within which a provider is accessible). Provider address data were collected from Virginia Department of Social Services day care search tool. The demand for day care services is the population 0-15 years old and the supply is the capacity of day cares (number of seats).",
+              "statement": "The daycare availability for {features.name} is {value}.",
+              "equity_category": "Availability",
+              "sources": [
+                {
+                  "name": "Virginia Department of Social Services",
+                  "date_accessed": 2021,
+                  "url": "https://www.dss.virginia.gov/facility/search/cc.cgi"
+                }
+              ],
+              "citations": ["lou04", "lou09", "lou03", "saxon20"]
+            }
+          },
+          {
+            "name": "daycare_access_scores:daycare_median_drive_time_top5",
+            "duplicates": 1571,
+            "time_range": [11, 11],
+            "type": "float",
+            "missing": 1535,
+            "mean": 10.3143,
+            "sd": 9.4465,
+            "min": 0.9,
+            "max": 49.6,
+            "info": {
+              "category": "Education",
+              "measure_table": "dc_education_training.va_hdcttrbg_dss_2021_daycare_access_scores",
+              "full_name": "daycare_access_scores:daycare_median_drive_time_top5",
+              "measure": "median_drive_time_top5",
+              "type": "drive time",
+              "short_name": "Day care availability (drive time)",
+              "long_name": "Day care availability by median drive time to the five closest day cares in minutes",
+              "short_description": "Median drive time (minutes) to the five closest day cares from centroid of selected region",
+              "long_description": "Median drive time in minutes to the five closest day cares from centroid of selected region. Address data were collected from the Virginia Department of Social Services Child Day Care Facility search (Dataset for year 2019). Drive times were computed using Open Source Routing Machine (Using roads for year 2022).",
+              "statement": "The median drive time to the five closest day cares to {features.name} is {value}.",
+              "equity_category": "Availability",
+              "sources": [
+                {
+                  "name": "Virginia Department of Social Services",
+                  "date_accessed": 2021,
+                  "url": "https://www.dss.virginia.gov/facility/search/cc.cgi"
+                }
+              ],
               "citations": {}
             }
           },
@@ -786,12 +882,12 @@
           "url": "https://github.com/uva-bi-sdad/catchment"
         }
       },
-      "sha512": "453ea56b9922784ef4f0cacaecbb6f3384b022526b8131e1b687dbfe4c6b1deb9b8f719992b8e35e4d93e8e42e8ed8eb65c59ca3bb7db57f09f7b76870cebfe3"
+      "sha512": "a7699480725675ff0c6706d7fd80aec7c95a500f93d64fb7845c1a2021908329b0520d42ae90271f015424aaca2858f20f29110ad23a1173edc87727881f3490"
     },
     {
-      "bytes": 1491424,
+      "bytes": 1526280,
       "encoding": "ISO-8859-1",
-      "md5": "d30924487919b976e265ed0dc7219416",
+      "md5": "b02f6304b0c58dab29c4032005557f82",
       "format": "education/docs/data/tract",
       "name": "tract",
       "filename": "tract.csv.xz",
@@ -804,7 +900,7 @@
       ],
       "time": "time",
       "profile": "data-resource",
-      "created": "2022-08-01 21:16:34",
+      "created": "2022-08-01 22:56:01",
       "last_modified": "2022-05-15 23:31:30",
       "row_count": 39468,
       "entity_count": 3289,
@@ -822,6 +918,102 @@
             "max": 2021,
             "info": {
               "sources": {},
+              "citations": {}
+            }
+          },
+          {
+            "name": "daycare_access_scores:daycare_cnt",
+            "duplicates": 38901,
+            "time_range": [11, 11],
+            "type": "integer",
+            "missing": 37928,
+            "mean": 242.1429,
+            "sd": 239.0879,
+            "min": 4,
+            "max": 2273,
+            "info": {
+              "category": "Education",
+              "measure_table": "dc_education_training.va_hdcttrbg_dss_2021_daycare_access_scores",
+              "full_name": "daycare_services_access_scores:daycare_cnt",
+              "measure": "daycare_cnt",
+              "type": "count",
+              "short_name": "Day care capacity",
+              "long_name": "Access to day care by capacity",
+              "short_description": "Count of day care capacity (seats) based on provider locations",
+              "long_description": "Count of day care capacity (seats) based on provider locations. Address and capacity data were collected from Virginia Department of Social Services day care search tool.",
+              "statement": "There are {value} daycare seats in {features.name}.",
+              "equity_category": "Availability",
+              "sources": [
+                {
+                  "name": "Virginia Department of Social Services",
+                  "date_accessed": 2021,
+                  "url": "https://www.dss.virginia.gov/facility/search/cc.cgi"
+                }
+              ],
+              "citations": {}
+            }
+          },
+          {
+            "name": "daycare_access_scores:daycare_3sfca",
+            "duplicates": 37601,
+            "time_range": [11, 11],
+            "type": "float",
+            "missing": 37602,
+            "mean": 3.4784,
+            "sd": 1.1559,
+            "min": 0.1929,
+            "max": 7.172,
+            "info": {
+              "category": "Education",
+              "measure_table": "dc_education_training.va_hdcttrbg_dss_2021_daycare_access_scores",
+              "full_name": "daycare_access_scores:daycare_3sfca",
+              "measure": "daycare_3sfca",
+              "type": "index",
+              "short_name": "Day care geographic availability",
+              "long_name": "Day care geographic availability (3-step floating catchment area)",
+              "short_description": "Index of day care availability based on supply of and demand for providers",
+              "long_description": "Day care availability based on 3-step floating catchment areas. This method is an aggregation of day care facilities per population ratios weighted by distance or travel time in each catchment area (area within which a provider is accessible). Provider address data were collected from Virginia Department of Social Services day care search tool. The demand for day care services is the population 0-15 years old and the supply is the capacity of day cares (number of seats).",
+              "statement": "The daycare availability for {features.name} is {value}.",
+              "equity_category": "Availability",
+              "sources": [
+                {
+                  "name": "Virginia Department of Social Services",
+                  "date_accessed": 2021,
+                  "url": "https://www.dss.virginia.gov/facility/search/cc.cgi"
+                }
+              ],
+              "citations": ["lou04", "lou09", "lou03", "saxon20"]
+            }
+          },
+          {
+            "name": "daycare_access_scores:daycare_median_drive_time_top5",
+            "duplicates": 39172,
+            "time_range": [11, 11],
+            "type": "float",
+            "missing": 37569,
+            "mean": 7.7349,
+            "sd": 8.0094,
+            "min": 0.4,
+            "max": 71.7,
+            "info": {
+              "category": "Education",
+              "measure_table": "dc_education_training.va_hdcttrbg_dss_2021_daycare_access_scores",
+              "full_name": "daycare_access_scores:daycare_median_drive_time_top5",
+              "measure": "median_drive_time_top5",
+              "type": "drive time",
+              "short_name": "Day care availability (drive time)",
+              "long_name": "Day care availability by median drive time to the five closest day cares in minutes",
+              "short_description": "Median drive time (minutes) to the five closest day cares from centroid of selected region",
+              "long_description": "Median drive time in minutes to the five closest day cares from centroid of selected region. Address data were collected from the Virginia Department of Social Services Child Day Care Facility search (Dataset for year 2019). Drive times were computed using Open Source Routing Machine (Using roads for year 2022).",
+              "statement": "The median drive time to the five closest day cares to {features.name} is {value}.",
+              "equity_category": "Availability",
+              "sources": [
+                {
+                  "name": "Virginia Department of Social Services",
+                  "date_accessed": 2021,
+                  "url": "https://www.dss.virginia.gov/facility/search/cc.cgi"
+                }
+              ],
               "citations": {}
             }
           },
@@ -1558,12 +1750,12 @@
           "url": "https://github.com/uva-bi-sdad/catchment"
         }
       },
-      "sha512": "bc49330fcb63bafeb68c4f4081bcfd6616c8a8b850cd8c92281adcc855502ca062121904007ec79f9baba8ff7d69959900397133e247473b87cd260d32ab66a0"
+      "sha512": "68cf03b03435d21709050470266b115237f1e3c13166963b1f77dca616693b41908484dac36605e6f57ddd602da0b02ee258c9f5ff0c146bda84d91241a70162"
     },
     {
-      "bytes": 3326384,
+      "bytes": 3455464,
       "encoding": "ISO-8859-1",
-      "md5": "bfd9e34b569a0bffaa56fcd900959331",
+      "md5": "eb8fa37fa482ad8637e76332d0a5be1f",
       "format": "education/docs/data/block_group",
       "name": "block_group",
       "filename": "block_group.csv.xz",
@@ -1576,7 +1768,7 @@
       ],
       "time": "time",
       "profile": "data-resource",
-      "created": "2022-08-01 21:16:31",
+      "created": "2022-08-01 22:55:58",
       "last_modified": "2022-05-15 23:31:25",
       "row_count": 111984,
       "entity_count": 9332,
@@ -1594,6 +1786,102 @@
             "max": 2021,
             "info": {
               "sources": {},
+              "citations": {}
+            }
+          },
+          {
+            "name": "daycare_access_scores:daycare_cnt",
+            "duplicates": 111503,
+            "time_range": [11, 11],
+            "type": "integer",
+            "missing": 109244,
+            "mean": 136.0949,
+            "sd": 146.2794,
+            "min": 4,
+            "max": 1514,
+            "info": {
+              "category": "Education",
+              "measure_table": "dc_education_training.va_hdcttrbg_dss_2021_daycare_access_scores",
+              "full_name": "daycare_services_access_scores:daycare_cnt",
+              "measure": "daycare_cnt",
+              "type": "count",
+              "short_name": "Day care capacity",
+              "long_name": "Access to day care by capacity",
+              "short_description": "Count of day care capacity (seats) based on provider locations",
+              "long_description": "Count of day care capacity (seats) based on provider locations. Address and capacity data were collected from Virginia Department of Social Services day care search tool.",
+              "statement": "There are {value} daycare seats in {features.name}.",
+              "equity_category": "Availability",
+              "sources": [
+                {
+                  "name": "Virginia Department of Social Services",
+                  "date_accessed": 2021,
+                  "url": "https://www.dss.virginia.gov/facility/search/cc.cgi"
+                }
+              ],
+              "citations": {}
+            }
+          },
+          {
+            "name": "daycare_access_scores:daycare_3sfca",
+            "duplicates": 106686,
+            "time_range": [11, 11],
+            "type": "float",
+            "missing": 106687,
+            "mean": 3.4628,
+            "sd": 1.2185,
+            "min": 0.0122,
+            "max": 15.282,
+            "info": {
+              "category": "Education",
+              "measure_table": "dc_education_training.va_hdcttrbg_dss_2021_daycare_access_scores",
+              "full_name": "daycare_access_scores:daycare_3sfca",
+              "measure": "daycare_3sfca",
+              "type": "index",
+              "short_name": "Day care geographic availability",
+              "long_name": "Day care geographic availability (3-step floating catchment area)",
+              "short_description": "Index of day care availability based on supply of and demand for providers",
+              "long_description": "Day care availability based on 3-step floating catchment areas. This method is an aggregation of day care facilities per population ratios weighted by distance or travel time in each catchment area (area within which a provider is accessible). Provider address data were collected from Virginia Department of Social Services day care search tool. The demand for day care services is the population 0-15 years old and the supply is the capacity of day cares (number of seats).",
+              "statement": "The daycare availability for {features.name} is {value}.",
+              "equity_category": "Availability",
+              "sources": [
+                {
+                  "name": "Virginia Department of Social Services",
+                  "date_accessed": 2021,
+                  "url": "https://www.dss.virginia.gov/facility/search/cc.cgi"
+                }
+              ],
+              "citations": ["lou04", "lou09", "lou03", "saxon20"]
+            }
+          },
+          {
+            "name": "daycare_access_scores:daycare_median_drive_time_top5",
+            "duplicates": 111594,
+            "time_range": [11, 11],
+            "type": "float",
+            "missing": 106663,
+            "mean": 7.8604,
+            "sd": 8.3159,
+            "min": 0.2,
+            "max": 88.5,
+            "info": {
+              "category": "Education",
+              "measure_table": "dc_education_training.va_hdcttrbg_dss_2021_daycare_access_scores",
+              "full_name": "daycare_access_scores:daycare_median_drive_time_top5",
+              "measure": "median_drive_time_top5",
+              "type": "drive time",
+              "short_name": "Day care availability (drive time)",
+              "long_name": "Day care availability by median drive time to the five closest day cares in minutes",
+              "short_description": "Median drive time (minutes) to the five closest day cares from centroid of selected region",
+              "long_description": "Median drive time in minutes to the five closest day cares from centroid of selected region. Address data were collected from the Virginia Department of Social Services Child Day Care Facility search (Dataset for year 2019). Drive times were computed using Open Source Routing Machine (Using roads for year 2022).",
+              "statement": "The median drive time to the five closest day cares to {features.name} is {value}.",
+              "equity_category": "Availability",
+              "sources": [
+                {
+                  "name": "Virginia Department of Social Services",
+                  "date_accessed": 2021,
+                  "url": "https://www.dss.virginia.gov/facility/search/cc.cgi"
+                }
+              ],
               "citations": {}
             }
           },
@@ -2318,7 +2606,7 @@
           "url": "https://github.com/uva-bi-sdad/catchment"
         }
       },
-      "sha512": "f642493d0e71271b8fba70ae93b8edccfef9e2057027a9626021e06b02f4c9876b93990a2953fb93444390a1d8f180893fd0e58659e3de7ee99fc76c55b3eb2b"
+      "sha512": "ae21938823c8e9f530b9e0a3037e8037e28e45145b31474ef9fa38a382ed970d4b42e55b9fbd16cc5e43dab5fbdaeb177bad78087e5e139d620ce1e2d5004e08"
     }
   ]
 }
