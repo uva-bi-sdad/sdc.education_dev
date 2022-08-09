@@ -43,7 +43,7 @@ page_section(
   ),
   page_section(
     {
-      layers <- lapply(paste0("docs/", list.files("docs", "^points_")), function(f) list(
+      layers <- lapply(list.files("data/nces", "^points_", recursive = TRUE, full.names = TRUE), function(f) list(
         url = f, time = as.numeric(gsub("[^0-9]", "", f))
       ))
       output_map(

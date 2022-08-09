@@ -95,7 +95,7 @@ process_year <- function(year, dir = "data/original", districts = county_distric
     providers$LONGITUD <- as.numeric(providers$LONGITUD)
     providers$LATITUDE <- as.numeric(providers$LATITUDE)
     # write location files
-    out <- paste0("docs/points_", year, ".geojson")
+    out <- paste0("data/nces/distribution/points_", year, ".geojson")
     unlink(out)
     write_sf(st_as_sf(data.frame(
       providers[, -(2:3)],
