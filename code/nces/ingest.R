@@ -128,10 +128,12 @@ process_year <- function(year, dir = "data/original", districts = county_distric
     message(year, " calculating measures")
     # get minimum travel times
     population$schools_2year_min_drivetime <- apply(
-      traveltimes[, providers[providers$type == 2, "GEOID"]], 1, min, na.rm = TRUE
+      traveltimes[, providers[providers$type == 2, "GEOID"]], 1, min,
+      na.rm = TRUE
     )
     population$schools_under2year_min_drivetime <- apply(
-      traveltimes[, providers[providers$type == 3, "GEOID"]], 1, min, na.rm = TRUE
+      traveltimes[, providers[providers$type == 3, "GEOID"]], 1, min,
+      na.rm = TRUE
     )
     # calculate catchment ratios
     population$schools_2year_per_100k <- catchment_ratio(
@@ -158,7 +160,7 @@ process_year <- function(year, dir = "data/original", districts = county_distric
     write.csv(population, xzfile(results_file), row.names = FALSE)
     population
   }
-  block_groups <- block_groups[substring(block_groups$GEOID, 1, 5) %in% names(districts),]
+  block_groups <- block_groups[substring(block_groups$GEOID, 1, 5) %in% names(districts), ]
   # aggregate
   agger <- function(d, part = NULL) {
     drivetimes <- grep("drivetime", colnames(d), fixed = TRUE)
@@ -219,7 +221,7 @@ entity_names <- unlist(lapply(entity_info, "[[", "region_name"))
 
 # reformat and save
 final <- do.call(rbind, lapply(data, function(d) {
-  year = d$block_groups[1, "year"]
+  year <- d$block_groups[1, "year"]
   d$block_groups <- d$block_groups[, colnames(d$districts)]
   d <- do.call(rbind, d)
   varnames <- colnames(d)[-1]
@@ -231,15 +233,17 @@ final <- do.call(rbind, lapply(data, function(d) {
   d$region_name <- d$GEOID
   present_ids <- d$GEOID[d$GEOID %in% names(entity_names)]
   d[present_ids, "region_name"] <- entity_names[present_ids]
-  do.call(rbind, lapply(split(d, seq_len(nrow(d))), function(r) data.frame(
-    geoid = r$GEOID,
-    region_type = r$region_type,
-    region_name = r$region_name,
-    year = year,
-    measure = varnames,
-    value = as.numeric(r[varnames]),
-    measure_type = ifelse(grepl("drivetime", varnames, fixed = TRUE), "minutes", "per 100k")
-  )))
+  do.call(rbind, lapply(split(d, seq_len(nrow(d))), function(r) {
+    data.frame(
+      geoid = r$GEOID,
+      region_type = r$region_type,
+      region_name = r$region_name,
+      year = year,
+      measure = varnames,
+      value = as.numeric(r[varnames]),
+      measure_type = ifelse(grepl("drivetime", varnames, fixed = TRUE), "minutes", "per 100k")
+    )
+  }))
 }))
 
 write.csv(final, xzfile("data/distribution/nces.csv.xz"), row.names = FALSE)

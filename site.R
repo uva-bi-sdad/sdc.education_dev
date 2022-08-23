@@ -20,7 +20,8 @@ page_section(
     page_section(
       wraps = "col", sizes = c(NA, 1),
       input_select(
-        "Variable", options = "variables", default = 5,
+        "Variable",
+        options = "variables", default = 5,
         id = "selected_variable"
       ),
       input_number("Time", min = "filter.time_min", max = "filter.time_max", default = "max", id = "selected_time")
@@ -43,9 +44,11 @@ page_section(
   ),
   page_section(
     {
-      layers <- lapply(list.files("data/nces", "^points_", recursive = TRUE, full.names = TRUE), function(f) list(
-        url = f, time = as.numeric(gsub("[^0-9]", "", f))
-      ))
+      layers <- lapply(list.files("data/nces", "^points_", recursive = TRUE, full.names = TRUE), function(f) {
+        list(
+          url = f, time = as.numeric(gsub("[^0-9]", "", f))
+        )
+      })
       output_map(
         list(
           list(
@@ -93,7 +96,8 @@ page_section(
             )
           )
         ),
-        overlays = c(list(
+        overlays = c(
+          list(
             list(
               variable = "nces:schools_2year_per_100k",
               source = layers,
@@ -115,14 +119,16 @@ page_section(
               filter = list(feature = "ICLEVEL", operator = "=", value = 3)
             )
           ),
-          lapply(c("biomedical", "computer", "engineering", "physical", "science"), function(p) list(
-            variable = paste0("nces:schools_2year_with_", p, "_program_per_100k"),
-            source = layers,
-            filter = list(
-              list(feature = "ICLEVEL", operator = "=", value = 2),
-              list(feature = p, operator = "=", value = 1)
+          lapply(c("biomedical", "computer", "engineering", "physical", "science"), function(p) {
+            list(
+              variable = paste0("nces:schools_2year_with_", p, "_program_per_100k"),
+              source = layers,
+              filter = list(
+                list(feature = "ICLEVEL", operator = "=", value = 2),
+                list(feature = p, operator = "=", value = 1)
+              )
             )
-          ))
+          })
         ),
         id = "main_map",
         subto = c("main_plot", "main_legend"),
