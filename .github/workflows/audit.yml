@@ -5,7 +5,7 @@ on:
       - 'main'
 jobs:
   book-keeping:
-    if: github.repository == 'uva-bi-sdad/sdc.broadband_dev'
+    if: github.repository == 'uva-bi-sdad/sdc.education_dev'
     runs-on: ubuntu-latest
     steps:
       - run: echo "🎉 The job was automatically triggered by a ${{ github.event_name }} event."
@@ -31,7 +31,7 @@ jobs:
       - name: Install requirements
         run: |
           pip install -r auditor/requirements.txt
-      - name: Execute python script # create a manifest with the current directory as root
+      - name: Execut python script # create a manifest with the current directory as root
         run: |
           python auditor/audit.py -i .
       # - name: update the yml file to the newest version on the auditor repo (requires permissions )
@@ -68,12 +68,10 @@ jobs:
       - name: Push directory to another repository
         uses: cpina/github-action-push-to-another-repository@main
         env:
-          SSH_DEPLOY_KEY: ${{ secrets.SSH_DEPLOY_KEY }}
+          SSH_DEPLOY_KEY: ${{ secrets.SDC_SECRET }}
         with:
           source-directory: .
           destination-github-username: 'uva-bi-sdad'
-          destination-repository-name: 'sdc.broadband'
+          destination-repository-name: 'sdc.education'
           target-branch: main
       - run: echo "🍏 This job's status is ${{ job.status }}."
-      
-
