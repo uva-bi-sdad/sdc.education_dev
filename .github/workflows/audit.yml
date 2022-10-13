@@ -31,12 +31,12 @@ jobs:
       - name: Install requirements
         run: |
           pip install -r auditor/requirements.txt
-      - name: Execut python script # create a manifest with the current directory as root
+      - name: Execute audit # create a manifest with the current directory as root
         run: |
           python auditor/audit.py -i .
-      # - name: update the yml file to the newest version on the auditor repo (requires permissions )
-      #   run: |
-      #     cp sdad_data-auditor/runner.yml .github/workflows/runner.yml
+      - name: Auto generate measure_info and distribution/temp files
+        run: |
+          python auditor/repo_transform.py -i .
       - name: Remove auditor files
         run: |
           rm -rf auditor
