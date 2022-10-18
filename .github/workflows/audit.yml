@@ -31,12 +31,12 @@ jobs:
       - name: Install requirements
         run: |
           pip install -r auditor/requirements.txt
+      - name: Tidying up the repo
+        run: |
+          python auditor/repo_transform.py -i . -fdmg  
       - name: Execute audit # create a manifest with the current directory as root
         run: |
-          python auditor/audit.py -i .
-      - name: Auto generate measure_info and distribution/temp files
-        run: |
-          python auditor/repo_transform.py -i .
+          python auditor/audit.py -i .          
       - name: Remove auditor files
         run: |
           rm -rf auditor
