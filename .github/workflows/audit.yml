@@ -4,7 +4,7 @@ on:
     branches:
       - 'main'
 jobs:
-  book-keeping:
+  update_private_repo:
     if: github.repository == 'uva-bi-sdad/sdc.education_dev'
     runs-on: ubuntu-latest
     steps:
@@ -50,6 +50,14 @@ jobs:
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           force: true
+          
+  update_public_repo:
+    needs: update_private_repo
+    if: success() || failure()
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository code
+        uses: actions/checkout@master    
       - name: List current working directory
         run: |
           ls -la          
@@ -64,7 +72,7 @@ jobs:
           pwd
       - name: List current working directory
         run: |
-          ls -la
+          tree .
       - name: Push directory to another repository
         uses: cpina/github-action-push-to-another-repository@main
         env:
