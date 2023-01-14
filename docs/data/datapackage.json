@@ -25,7 +25,7 @@
       "id_length": 12,
       "time": "time",
       "profile": "data-resource",
-      "created": "2023-01-14 12:09:37",
+      "created": "2023-01-14 16:13:08",
       "last_modified": "2022-09-15 21:22:22",
       "row_count": 111864,
       "entity_count": 9322,
@@ -1000,9 +1000,9 @@
       "sha512": "8986d6033c7b905a3c0b2816f69ffe522355693dccf0455c05b08f159e2e7955aa03b255f8c0c4af4b023265391d5f9f471019fae05b971b0772bf5b2d7ee92c"
     },
     {
-      "bytes": 99660,
+      "bytes": 102080,
       "encoding": "ISO-8859-1",
-      "md5": "dd1bcaeea8f7c5852afbf4b48955766a",
+      "md5": "1c379f14125b8472b8359ecbe0e87888",
       "format": "education_dev/docs/data/county",
       "name": "county",
       "filename": "county.csv.xz",
@@ -1016,7 +1016,7 @@
       "id_length": 5,
       "time": "time",
       "profile": "data-resource",
-      "created": "2023-01-14 12:09:37",
+      "created": "2023-01-14 16:13:08",
       "last_modified": "2022-09-15 21:22:22",
       "row_count": 1908,
       "entity_count": 159,
@@ -1173,7 +1173,7 @@
           },
           {
             "name": "daycare_over_4_per_1k",
-            "duplicates": 1906,
+            "duplicates": 1774,
             "info": {
               "category": "Education",
               "full_name": "daycare_over_4_per_1k",
@@ -1220,16 +1220,16 @@
               }
             },
             "time_range": [11, 11],
-            "type": "integer",
+            "type": "float",
             "missing": 1775,
-            "mean": 0,
-            "sd": 0,
-            "min": 0,
-            "max": 0
+            "mean": 56.332557,
+            "sd": 63.64186,
+            "min": 6e-06,
+            "max": 302.219007
           },
           {
             "name": "daycare_under_10_per_1k",
-            "duplicates": 1906,
+            "duplicates": 1774,
             "info": {
               "category": "Education",
               "full_name": "daycare_under_10_per_1k",
@@ -1276,12 +1276,12 @@
               }
             },
             "time_range": [11, 11],
-            "type": "integer",
+            "type": "float",
             "missing": 1775,
-            "mean": 0,
-            "sd": 0,
-            "min": 0,
-            "max": 0
+            "mean": 92.463444,
+            "sd": 55.598738,
+            "min": 0.508875,
+            "max": 304.28687
           },
           {
             "name": "acs_postsecondary_count",
@@ -2004,12 +2004,12 @@
           "url": "https://github.com/uva-bi-sdad/catchment"
         }
       },
-      "sha512": "ccd17c168b160721c897b8f88048961dd4c86dd4ec9f3e4d416abe40e72b8e8a61232bc1e6cba748cbbe6626ec1b7abce80bbc3b2d3cf1250893f5f3dd31c704"
+      "sha512": "52166cfc247661041e188b153eedc2ff827ab2be528cf0b30c49b574d7a543b574c8aacb4fe04a77656103bd0cfb19baf2116277ec524662b9d2daad4b5aa349"
     },
     {
-      "bytes": 27676,
+      "bytes": 28264,
       "encoding": "ISO-8859-1",
-      "md5": "f21052c60474bdd312854e8956c57eb3",
+      "md5": "ab408ada71509786208cc41f254bfb85",
       "format": "education_dev/docs/data/health_district",
       "name": "health_district",
       "filename": "health_district.csv.xz",
@@ -2023,7 +2023,7 @@
       "id_length": 8,
       "time": "time",
       "profile": "data-resource",
-      "created": "2023-01-14 12:09:37",
+      "created": "2023-01-14 16:13:08",
       "last_modified": "2022-09-15 21:22:22",
       "row_count": 444,
       "entity_count": 37,
@@ -2180,7 +2180,7 @@
           },
           {
             "name": "daycare_over_4_per_1k",
-            "duplicates": 442,
+            "duplicates": 408,
             "info": {
               "category": "Education",
               "full_name": "daycare_over_4_per_1k",
@@ -2227,16 +2227,16 @@
               }
             },
             "time_range": [11, 11],
-            "type": "integer",
+            "type": "float",
             "missing": 409,
-            "mean": 0,
-            "sd": 0,
-            "min": 0,
-            "max": 0
+            "mean": 62.079739,
+            "sd": 46.068878,
+            "min": 3.641326,
+            "max": 162.323733
           },
           {
             "name": "daycare_under_10_per_1k",
-            "duplicates": 442,
+            "duplicates": 408,
             "info": {
               "category": "Education",
               "full_name": "daycare_under_10_per_1k",
@@ -2283,12 +2283,12 @@
               }
             },
             "time_range": [11, 11],
-            "type": "integer",
+            "type": "float",
             "missing": 409,
-            "mean": 0,
-            "sd": 0,
-            "min": 0,
-            "max": 0
+            "mean": 96.664548,
+            "sd": 38.911747,
+            "min": 3.488935,
+            "max": 175.712895
           },
           {
             "name": "acs_postsecondary_count",
@@ -3011,7 +3011,7 @@
           "url": "https://github.com/uva-bi-sdad/catchment"
         }
       },
-      "sha512": "739336b03eb9665a9056a89ce34dc16385f825ad44539fde97bf1e285e55ba34960430157f5eb53ec030c1d46aad7b7e75c9209178a7c77091513f73a57dda2e"
+      "sha512": "c0326f365828ba934143e12e14578ba67d808c060328f49565e38342984f2175a530cd188e50a6bd7f842d2a45323ea0ce46b560af01823534987a76ac901581"
     },
     {
       "bytes": 3136,
@@ -3030,7 +3030,7 @@
       "id_length": 7,
       "time": "time",
       "profile": "data-resource",
-      "created": "2023-01-14 12:09:37",
+      "created": "2023-01-14 16:13:08",
       "last_modified": "2022-09-15 21:22:22",
       "row_count": 1392,
       "entity_count": 116,
@@ -3957,9 +3957,9 @@
       "sha512": "c4c81b0f86a6512457b0bbdf2a80372c72491aa3638e02b81bfbbf42935cf5f1b2651da4b22b8a26e71280e90a472e1ed85acbbbb956b4dfb97fa16593cf3d59"
     },
     {
-      "bytes": 1855568,
+      "bytes": 1894308,
       "encoding": "ISO-8859-1",
-      "md5": "765eb97b0884a8c83945406feff5f3d1",
+      "md5": "ce8750624eb2bbdef166c55320f2177f",
       "format": "education_dev/docs/data/tract",
       "name": "tract",
       "filename": "tract.csv.xz",
@@ -3973,7 +3973,7 @@
       "id_length": 11,
       "time": "time",
       "profile": "data-resource",
-      "created": "2023-01-14 12:09:41",
+      "created": "2023-01-14 16:13:13",
       "last_modified": "2022-09-15 21:22:22",
       "row_count": 51408,
       "entity_count": 4284,
@@ -4130,7 +4130,7 @@
           },
           {
             "name": "daycare_over_4_per_1k",
-            "duplicates": 51406,
+            "duplicates": 49267,
             "info": {
               "category": "Education",
               "full_name": "daycare_over_4_per_1k",
@@ -4177,16 +4177,16 @@
               }
             },
             "time_range": [11, 11],
-            "type": "integer",
+            "type": "float",
             "missing": 49222,
-            "mean": 0,
-            "sd": 0,
+            "mean": 75.674376,
+            "sd": 64.094306,
             "min": 0,
-            "max": 0
+            "max": 427.994389
           },
           {
             "name": "daycare_under_10_per_1k",
-            "duplicates": 51406,
+            "duplicates": 49274,
             "info": {
               "category": "Education",
               "full_name": "daycare_under_10_per_1k",
@@ -4233,12 +4233,12 @@
               }
             },
             "time_range": [11, 11],
-            "type": "integer",
+            "type": "float",
             "missing": 49222,
-            "mean": 0,
-            "sd": 0,
+            "mean": 103.698005,
+            "sd": 53.353609,
             "min": 0,
-            "max": 0
+            "max": 515.915434
           },
           {
             "name": "acs_postsecondary_count",
@@ -4953,7 +4953,7 @@
           "url": "https://github.com/uva-bi-sdad/catchment"
         }
       },
-      "sha512": "6c3fcdfc81352a8ffa9fd4ab33d4f17e9420954da6bbea493ae74b23212da172f47e622bb217a900f7becb7aab3352eae2f1f445490e85326fde2c51e0a4c7f6"
+      "sha512": "5d83020eba29f9ac7087718244ae2064c257f286c2a98602e837faf3d9322ba78f30677aa8df843e5633ece95dd1d6b89f98300c2eb447d98b5a19c0beef0a2d"
     }
   ]
 }

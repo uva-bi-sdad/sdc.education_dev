@@ -325,9 +325,9 @@ agger <- function(d, part = NULL) {
       daycare_min_drivetime_error = mean(d$daycare_min_drivetime_error, na.rm = TRUE),
       daycare_capacity = sum(d$daycare_capacity, na.rm = TRUE),
       daycare_capacity_error = sum(d$daycare_capacity_error, na.rm = TRUE),
-      unlist(lapply(c("", "over_4_", "under_10_"), function(s) {
+      unlist(lapply(c("", "over_4", "under_10"), function(s) {
         pop <- paste0("population_", if (s == "") "under_15" else s)
-        vs <- paste0("daycare_", s, "per_1k", c("", "_error"))
+        vs <- paste0("daycare_", if (s != "") paste0(s, "_"), "per_1k", c("", "_error"))
         totals <- c(sum(d[[pop]], na.rm = TRUE), sum(d[[paste0(pop, "_error")]], na.rm = TRUE))
         totals[totals == 0] <- 1
         ragg <- sum(d[[vs[1]]] * d[[pop]], na.rm = TRUE) / totals[1]
