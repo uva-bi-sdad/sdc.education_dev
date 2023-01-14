@@ -173,7 +173,7 @@ if (file.exists(locations_file)) {
   points_file <- paste0(dir, "/distribution/points_", year, ".geojson")
   unlink(points_file)
   write_sf(st_as_sf(locations[, c(
-    "id", "name", "quality", "type", "age_min", "age_max", "licence", "licence", "expiration",
+    "id", "name", "quality", "type", "age_min", "age_max", "licence", "expiration",
     "capacity", "ages", "facility_id", "inspections", "inspection_violation", "long", "lat"
   )], coords = c("long", "lat")), points_file)
 }
