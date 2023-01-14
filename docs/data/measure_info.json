@@ -1,217 +1,200 @@
 {
-  "daycare_access_scores:daycare_cnt": {
+  "daycare_capacity": {
     "category": "Education",
-    "measure_table": "dc_education_training.va_hdcttrbg_dss_2021_daycare_access_scores",
-    "full_name": "daycare_services_access_scores:daycare_cnt",
-    "measure": "daycare_cnt",
+    "full_name": "daycare_capacity",
+    "measure": "daycare_capacity",
     "type": "count",
-    "short_name": "Day care capacity",
-    "long_name": "Access to day care by capacity",
-    "short_description": "Count of day care capacity (seats) based on provider locations",
-    "long_description": "Count of day care capacity (seats) based on provider locations. Address and capacity data were collected from Virginia Department of Social Services day care search tool.",
-    "statement": "There are {value} daycare seats in {features.name}.",
+    "short_name": "Day Care Capacity",
+    "long_name": "Day Care Capacity",
+    "short_description": "Summed capacity (seats) of all day care providers within the region.",
+    "long_description": "Summed capacity (seats) of all day care providers within the region.",
+    "statement": "There are {value} daycare seats in {region_name}.",
     "equity_category": "Availability",
     "sources": [
       {
         "name": "Virginia Department of Social Services",
-        "date_accessed": 2021,
-        "url": "https://www.dss.virginia.gov/facility/search/cc.cgi"
+        "location": "Child Day Care Search",
+        "location_url": "https://www.dss.virginia.gov/facility/search/cc2.cgi",
+        "date_accessed": 2023,
+        "url": "https://www.dss.virginia.gov"
       }
-    ]
+    ],
+    "layer": {
+      "source": "https://raw.githubusercontent.com/uva-bi-sdad/sdc.education/main/Daycare/data/distribution/points_{time}.geojson"
+    }
   },
-  "daycare_access_scores:daycare_3sfca": {
+  "daycare_min_drivetime": {
     "category": "Education",
-    "measure_table": "dc_education_training.va_hdcttrbg_dss_2021_daycare_access_scores",
-    "full_name": "daycare_access_scores:daycare_3sfca",
-    "measure": "daycare_3sfca",
-    "type": "index",
-    "short_name": "Day care geographic availability",
-    "long_name": "Day care geographic availability (3-step floating catchment area)",
-    "short_description": "Index of day care availability based on supply of and demand for providers",
-    "long_description": "Day care availability based on 3-step floating catchment areas. This method is an aggregation of day care facilities per population ratios weighted by distance or travel time in each catchment area (area within which a provider is accessible). Provider address data were collected from Virginia Department of Social Services day care search tool. The demand for day care services is the population 0-15 years old and the supply is the capacity of day cares (number of seats).",
-    "statement": "The daycare availability for {features.name} is {value}.",
+    "full_name": "daycare_min_drivetime",
+    "measure": "daycare_min_drivetime",
+    "type": "minutes",
+    "short_name": "Day Care Drive Time",
+    "long_name": "Minutes to Nearest Day Care",
+    "short_description": "Time (minutes) to drive to the nearest day care provider.",
+    "long_description": "Time (minutes) to drive to the nearest day care provider of any type.",
+    "statement": "It takes {value} to drive to the nearest day care provider in {region_name}.",
+    "equity_category": "Availability",
+    "sources": [
+      {
+        "name": "Virginia Department of Social Services",
+        "location": "Child Day Care Search",
+        "location_url": "https://www.dss.virginia.gov/facility/search/cc2.cgi",
+        "date_accessed": 2023,
+        "url": "https://www.dss.virginia.gov"
+      },
+      {
+        "name": "Open Source Routing Machine",
+        "date_accessed": 2022,
+        "url": "http://project-osrm.org"
+      }
+    ],
+    "layer": {
+      "source": "https://raw.githubusercontent.com/uva-bi-sdad/sdc.education/main/Daycare/data/distribution/points_{time}.geojson"
+    }
+  },
+  "daycare_per_1k": {
+    "category": "Education",
+    "full_name": "daycare_per_1k",
+    "measure": "daycare_per_1k",
+    "type": "per 1k",
+    "short_name": "Day Care Seats Per 1k Children",
+    "long_name": "Day Care Seats Per 1k Children Under 15",
+    "short_description": "Number of day care seats per 1,000 children under 15 years of age.",
+    "long_description": "Number of day care seats per 1,000 children under 15 years of age, as calculated within floating catchment areas. Catchment area ratios are based on population under 15 within block groups (as estimated in the American Community Survey), day care capacity (as reported by the Virginia Department of Social Services), and travel times between block group centroids and day care locations (as calculated with the Open Source Routing Machine). Catchment areas are weighted by travel time with a Gaussian function with scale of 18, which are normalized for each consumer.",
+    "statement": "There are {value} day care seats per 1,000 children under 15 in {region_name}.",
     "equity_category": "Availability",
     "citations": [
-      "lou04",
-      "lou09",
-      "lou03",
-      "saxon20"
+      "wan12",
+      "bii21"
     ],
     "sources": [
       {
         "name": "Virginia Department of Social Services",
-        "date_accessed": 2021,
-        "url": "https://www.dss.virginia.gov/facility/search/cc.cgi"
+        "location": "Child Day Care Search",
+        "location_url": "https://www.dss.virginia.gov/facility/search/cc2.cgi",
+        "date_accessed": 2023,
+        "url": "https://www.dss.virginia.gov"
+      },
+      {
+        "name": "American Community Survey",
+        "location": "data/5_year_seq_by_state",
+        "location_url": "https://www2.census.gov/programs-surveys/acs/summary_file",
+        "date_accessed": 2023,
+        "url": "https://www.census.gov/programs-surveys/acs.html"
+      },
+      {
+        "name": "Open Source Routing Machine",
+        "date_accessed": 2022,
+        "url": "http://project-osrm.org"
       }
-    ]
+    ],
+    "layer": {
+      "source": "https://raw.githubusercontent.com/uva-bi-sdad/sdc.education/main/Daycare/data/distribution/points_{time}.geojson",
+      "filter": [
+        {
+          "feature": "age_min",
+          "operator": "<",
+          "value": 5
+        },
+        {
+          "feature": "age_max",
+          "operator": ">",
+          "value": 9
+        }
+      ]
+    }
   },
-  "daycare_access_scores:daycare_median_drive_time_top5": {
+  "daycare_over_4_per_1k": {
     "category": "Education",
-    "measure_table": "dc_education_training.va_hdcttrbg_dss_2021_daycare_access_scores",
-    "full_name": "daycare_access_scores:daycare_median_drive_time_top5",
-    "measure": "median_drive_time_top5",
-    "type": "drive time",
-    "short_name": "Day care availability (drive time)",
-    "long_name": "Day care availability by median drive time to the five closest day cares in minutes",
-    "short_description": "Median drive time (minutes) to the five closest day cares from centroid of selected region",
-    "long_description": "Median drive time in minutes to the five closest day cares from centroid of selected region. Address data were collected from the Virginia Department of Social Services Child Day Care Facility search (Dataset for year 2019). Drive times were computed using Open Source Routing Machine (Using roads for year 2022).",
-    "statement": "The median drive time to the five closest day cares to {features.name} is {value}.",
+    "full_name": "daycare_over_4_per_1k",
+    "measure": "daycare_over_4_per_1k",
+    "type": "per 1k",
+    "short_name": "Day Care Seats Per 1k Children (5+)",
+    "long_name": "Day Care Seats Per 1k Children Ages 5 to 14",
+    "short_description": "Number of day care seats per 1,000 children between 5 and 14 years of age.",
+    "long_description": "Number of day care seats per 1,000 children between 5 and 14 years of age, as calculated within floating catchment areas. Catchment area ratios are based on population 5 and 14 within block groups (as estimated in the American Community Survey), day care capacity (as reported by the Virginia Department of Social Services), and travel times between block group centroids and day care locations (as calculated with the Open Source Routing Machine). Catchment areas are weighted by travel time with a Gaussian function with scale of 18, which are normalized for each consumer.",
+    "statement": "There are {value} day care seats per 1,000 children between 5 and 14 in {region_name}.",
     "equity_category": "Availability",
+    "citations": [
+      "wan12",
+      "bii21"
+    ],
     "sources": [
       {
         "name": "Virginia Department of Social Services",
-        "date_accessed": 2021,
-        "url": "https://www.dss.virginia.gov/facility/search/cc.cgi"
+        "location": "Child Day Care Search",
+        "location_url": "https://www.dss.virginia.gov/facility/search/cc2.cgi",
+        "date_accessed": 2023,
+        "url": "https://www.dss.virginia.gov"
+      },
+      {
+        "name": "American Community Survey",
+        "location": "data/5_year_seq_by_state",
+        "location_url": "https://www2.census.gov/programs-surveys/acs/summary_file",
+        "date_accessed": 2023,
+        "url": "https://www.census.gov/programs-surveys/acs.html"
+      },
+      {
+        "name": "Open Source Routing Machine",
+        "date_accessed": 2022,
+        "url": "http://project-osrm.org"
       }
-    ]
+    ],
+    "layer": {
+      "source": "https://raw.githubusercontent.com/uva-bi-sdad/sdc.education/main/Daycare/data/distribution/points_{time}.geojson",
+      "filter": {
+        "feature": "age_min",
+        "operator": ">",
+        "value": 4
+      }
+    }
+  },
+  "daycare_under_10_per_1k": {
+    "category": "Education",
+    "full_name": "daycare_under_10_per_1k",
+    "measure": "daycare_under_10_per_1k",
+    "type": "per 1k",
+    "short_name": "Day Care Seats Per 1k Children (<10)",
+    "long_name": "Day Care Seats Per 1k Children Under 10",
+    "short_description": "Number of day care seats per 1,000 children under 10 years of age.",
+    "long_description": "Number of day care seats per 1,000 children under 10 years of age, as calculated within floating catchment areas. Catchment area ratios are based on population under 10 within block groups (as estimated in the American Community Survey), day care capacity (as reported by the Virginia Department of Social Services), and travel times between block group centroids and day care locations (as calculated with the Open Source Routing Machine). Catchment areas are weighted by travel time with a Gaussian function with scale of 18, which are normalized for each consumer.",
+    "statement": "There are {value} day care seats per 1,000 children under 10 in {region_name}.",
+    "equity_category": "Availability",
+    "citations": [
+      "wan12",
+      "bii21"
+    ],
+    "sources": [
+      {
+        "name": "Virginia Department of Social Services",
+        "location": "Child Day Care Search",
+        "location_url": "https://www.dss.virginia.gov/facility/search/cc2.cgi",
+        "date_accessed": 2023,
+        "url": "https://www.dss.virginia.gov"
+      },
+      {
+        "name": "American Community Survey",
+        "location": "data/5_year_seq_by_state",
+        "location_url": "https://www2.census.gov/programs-surveys/acs/summary_file",
+        "date_accessed": 2023,
+        "url": "https://www.census.gov/programs-surveys/acs.html"
+      },
+      {
+        "name": "Open Source Routing Machine",
+        "date_accessed": 2022,
+        "url": "http://project-osrm.org"
+      }
+    ],
+    "layer": {
+      "source": "https://raw.githubusercontent.com/uva-bi-sdad/sdc.education/main/Daycare/data/distribution/points_{time}.geojson",
+      "filter": {
+        "feature": "age_max",
+        "operator": "<",
+        "value": 10
+      }
+    }
   },
   "_references": {
-    "lou04": {
-      "id": "lou04",
-      "author": [
-        {
-          "given": "Wei",
-          "family": "Lou"
-        }
-      ],
-      "year": 2004,
-      "title": "Using a gis-based floating catchment method to assess areas with shortage of physicians",
-      "journal": "Health & Place",
-      "volume": "10",
-      "number": 1,
-      "page": "1-11",
-      "doi": "10.1016/S1353-8292(02)00067-9"
-    },
-    "lou09": {
-      "id": "lou09",
-      "author": [
-        {
-          "given": "Wei",
-          "family": "Lou"
-        },
-        {
-          "given": "Yi",
-          "family": "Qi"
-        }
-      ],
-      "year": 2009,
-      "title": "An enhanced two-step floating catchment area (e2sfca) method for measuring spatial accessibility to primary care physicians",
-      "journal": "Health & Place",
-      "volume": "15",
-      "number": 4,
-      "page": "1100-1107",
-      "doi": "10.1016/j.healthplace.2009.06.002"
-    },
-    "lou03": {
-      "id": "lou03",
-      "author": [
-        {
-          "given": "Wei",
-          "family": "Lou"
-        },
-        {
-          "given": "Fahui",
-          "family": "Wang"
-        }
-      ],
-      "year": 2003,
-      "title": "Measures of spatial accessibility to health care in a gis environment: synthesis and a case study in the Chicago region",
-      "journal": "Environment and Planning B: Planning and Design",
-      "volume": "30",
-      "number": 6,
-      "page": "865-884",
-      "doi": "10.1068/b29120"
-    },
-    "saxon20": {
-      "id": "saxon20",
-      "author": [
-        {
-          "given": "James",
-          "family": "Saxon"
-        },
-        {
-          "given": "Julia",
-          "family": "Koschinsky"
-        },
-        {
-          "given": "Karina",
-          "family": "Acosta"
-        },
-        {
-          "given": "Vidal",
-          "family": "Anguiano"
-        },
-        {
-          "given": "Luc",
-          "family": "Anselin"
-        },
-        {
-          "given": "Sergio",
-          "family": "Rey"
-        }
-      ],
-      "year": 2020,
-      "title": "An Open Software Environment to Make Spatial Access Metrics More Accessible",
-      "journal": "University of Chicago: Center for Spatial Data Science",
-      "volume": "Preprint",
-      "doi": "10.13140/RG.2.2.12396.28807"
-    },
-    "liang17": {
-      "id": "liang17",
-      "author": [
-        {
-          "given": "Lan",
-          "family": "Liang"
-        },
-        {
-          "given": "Cindy",
-          "family": "Branch"
-        }
-      ],
-      "year": 2017,
-      "title": "Health Literacy Universal Precautions Are Still a Distant Dream: Analysis of U.S. Data on Health Literate Practices",
-      "journal": "Health Literacy Research and Practice",
-      "volume": "1",
-      "number": 4,
-      "page": "e216-e230",
-      "doi": "10.3928/24748307-20170929-01"
-    },
-    "savitz20": {
-      "id": "savitz20",
-      "author": [
-        {
-          "given": "Samuel",
-          "family": "Savitz"
-        },
-        {
-          "given": "Stacy",
-          "family": "Bailey"
-        },
-        {
-          "given": "Stacie",
-          "family": "Dusetzina"
-        },
-        {
-          "given": "W.",
-          "family": "Schuyler Jones"
-        },
-        {
-          "given": "Justin",
-          "family": "Trogdon"
-        },
-        {
-          "given": "Sally",
-          "family": "Stearns"
-        }
-      ],
-      "year": 2020,
-      "title": "Treatment selection and medication adherence for stable angina: The role of area-based health literacy",
-      "journal": "Journal of Evaluation in Clinical Practice",
-      "volume": "26",
-      "number": 6,
-      "page": "1711-1721",
-      "doi": "10.1111/jep.13341"
-    },
     "wan12": {
       "id": "wan12",
       "author": [
@@ -246,87 +229,53 @@
       "title": "catchment: Calculate spatial access and availability metrics",
       "version": "0.0.1",
       "url": "https://github.com/uva-bi-sdad/catchment"
+    },
+    "wan12.1": {
+      "id": "wan12",
+      "author": [
+        {
+          "given": "Neng",
+          "family": "Wan"
+        },
+        {
+          "given": "Bin",
+          "family": "Zou"
+        },
+        {
+          "given": "Troy",
+          "family": "Sternberg"
+        }
+      ],
+      "year": 2012,
+      "title": "A three-step floating catchment area method for analyzing spatial access to health services",
+      "journal": "International Journal of Geographical Information Science",
+      "volume": "26",
+      "page": "1073–1089",
+      "doi": "10.1080/13658816.2011.624987"
+    },
+    "bii21.1": {
+      "id": "bii21",
+      "author": [
+        {
+          "family": "Biocomplexity Institute and Initiative"
+        }
+      ],
+      "year": 2021,
+      "title": "catchment: Calculate spatial access and availability metrics",
+      "version": "0.0.1",
+      "url": "https://github.com/uva-bi-sdad/catchment"
     }
   },
-  "health_literacy_estimates:health_literacy_estimate": {
+  "schools_2year_per_100k": {
     "category": "Education",
-    "measure_table": "dc_education_training.va_hdcttr_sdad_2019_health_literacy_estimates",
-    "full_name": "health_literacy_estimates:health_literacy_estimate",
-    "measure": "health_literacy_estimate",
-    "type": "index",
-    "short_name": "Health literacy composite",
-    "long_name": "Health literacy composite",
-    "short_description": "Health literacy composite captures the adult population's ability to obtain, process, and understand basic health services to make appropriate health decisions",
-    "long_description": "The health literacy composite captures the adult population's ability to obtain, process, and understand basic health services to make appropriate health decisions. Health literacy composite is based on variables of demographic characteristics, health status, and health care use.",
-    "statement": "The health literacy composite for {features.name} is {value}.",
-    "equity_category": "Status",
-    "citations": [
-      "savitz20",
-      "liang17"
-    ],
-    "sources": [
-      {
-        "name": "Medical Expenditure Panel Survey",
-        "date_accessed": 2021,
-        "url": "https://www.meps.ahrq.gov/mepsweb/"
-      },
-      {
-        "name": "American Community Survey",
-        "date_accessed": 2021,
-        "url": "https://www.census.gov/programs-surveys/acs.html"
-      }
-    ]
-  },
-  "post_hs_education:perc_post_hs_edu": {
-    "category": "Education",
-    "measure_table": "dc_education_training.va_hdcttr_acs_2015_2019_post_hs_education",
-    "full_name": "post_hs_education:perc_post_hs_edu",
-    "measure": "perc_post_hs_edu",
-    "type": "percent",
-    "short_name": "Post-secondary education (percent)",
-    "long_name": "Percentage with post-secondary education",
-    "short_description": "Percentage of the population self-reported to have post-secondary education",
-    "long_description": "Percentage of the population self-reported to have post-secondary education. Based on American Community Survey Table B15003 in ACS 2015/2019 5-year estimates.",
-    "statement": "{value} of the population in {features.name} has a post-secondary education.",
-    "equity_category": "Status",
-    "sources": [
-      {
-        "name": "American Community Survey Table B15003",
-        "date_accessed": 2021,
-        "url": "https://www.census.gov/data/developers/data-sets/acs-5year.html"
-      }
-    ]
-  },
-  "post_hs_education:num_post_hs_edu": {
-    "category": "Education",
-    "measure_table": "dc_education_training.va_hdcttr_acs_2015_2019_post_hs_education",
-    "full_name": "post_hs_education:num_post_hs_edu",
-    "measure": "num_post_hs_edu",
-    "type": "integer",
-    "short_name": "Post-secondary education (count)",
-    "long_name": "Number of people with post-secondary education",
-    "short_description": "Number of people who self-reported to have post-secondary education",
-    "long_description": "Number of people who self-reported to have post-secondary education. Based on American Community Survey Table B15003 in ACS 2015/2019 5-year estimates.",
-    "statement": "{value} people in {features.name} have a post-secondary education.",
-    "equity_category": "Status",
-    "sources": [
-      {
-        "name": "American Community Survey Table B15003",
-        "date_accessed": 2021,
-        "url": "https://www.census.gov/data/developers/data-sets/acs-5year.html"
-      }
-    ]
-  },
-  "nces:schools_2year_per_100k": {
-    "category": "Education",
-    "full_name": "nces:schools_2year_per_100k",
+    "full_name": "schools_2year_per_100k",
     "measure": "schools_2year_per_100k",
     "type": "per 100k",
     "short_name": "2-year schools",
     "long_name": "2-year schools per 100k people over 14",
     "short_description": "Number of 2-year schools per 100k people over 14.",
     "long_description": "Number of schools authorized to award Associates degrees or 2-year or longer certificates per 100k people over 14, based on 3-step floating catchment areas defined by distance. Catchment areas were calculated using (a) 2-year schools as listed by the National Center for Education Statistics, with supply values of 1, (b) Census block groups, with supply values as the population over the age of 14 as reported the American Community Survey 5-year summaries, and (c) distances between school locations and block group centroids, weighted by a Gaussian function with a scaling parameter set to 18, as calculated by the catchment R package.",
-    "statement": "There are {value} 2-year schools per 100k people over 14 in {features.name}.",
+    "statement": "There are {value} 2-year schools per 100k people over 14 in {region_name}.",
     "equity_category": "Accessibility",
     "citations": [
       "wan12",
@@ -337,14 +286,14 @@
         "name": "National Center for Education Statistics",
         "location": "Integrated Postsecondary Education Data System, Institutional Characteristics",
         "location_url": "https://nces.ed.gov/ipeds/datacenter/DataFiles.aspx",
-        "date_accessed": 2022,
+        "date_accessed": 2023,
         "url": "https://nces.ed.gov"
       },
       {
         "name": "American Community Survey",
         "location": "data/5_year_seq_by_state",
         "location_url": "https://www2.census.gov/programs-surveys/acs/summary_file",
-        "date_accessed": 2022,
+        "date_accessed": 2023,
         "url": "https://www.census.gov/programs-surveys/acs.html"
       },
       {
@@ -352,25 +301,33 @@
         "date_accessed": 2022,
         "url": "http://project-osrm.org"
       }
-    ]
+    ],
+    "layer": {
+      "source": "https://raw.githubusercontent.com/uva-bi-sdad/sdc.education/main/Postsecondary/data/distribution/points_{time}.geojson",
+      "filter": {
+        "feature": "ICLEVEL",
+        "operator": "=",
+        "value": 2
+      }
+    }
   },
-  "nces:schools_2year_min_drivetime": {
+  "schools_2year_min_drivetime": {
     "category": "Education",
-    "full_name": "nces:schools_2year_min_drivetime",
+    "full_name": "schools_2year_min_drivetime",
     "measure": "schools_2year_min_drivetime",
     "type": "minutes",
     "short_name": "2-year school drive time",
     "long_name": "drive time to nearest 2-year school",
     "short_description": "Drive time to the nearest 2-year schools.",
     "long_description": "Minimal drive time to a school authorized to award Associates degrees or 2-year or longer certificates from the Census block group centroid, as calculated by the Open Source Routing Machine in 2022. School locations are from the National Center for Education Statistics. All distances are calculated at the block group level, then averaged up to higher-level geographies.",
-    "statement": "It takes {value} to drive to a 2-year school from {features.name}'s block group centroids on average.",
+    "statement": "It takes {value} to drive to a 2-year school from {region_name}'s block group centroids on average.",
     "equity_category": "Accessibility",
     "sources": [
       {
         "name": "National Center for Education Statistics",
         "location": "Integrated Postsecondary Education Data System, Institutional Characteristics",
         "location_url": "https://nces.ed.gov/ipeds/datacenter/DataFiles.aspx",
-        "date_accessed": 2022,
+        "date_accessed": 2023,
         "url": "https://nces.ed.gov"
       },
       {
@@ -378,18 +335,26 @@
         "date_accessed": 2022,
         "url": "http://project-osrm.org"
       }
-    ]
+    ],
+    "layer": {
+      "source": "https://raw.githubusercontent.com/uva-bi-sdad/sdc.education/main/Postsecondary/data/distribution/points_{time}.geojson",
+      "filter": {
+        "feature": "ICLEVEL",
+        "operator": "=",
+        "value": 2
+      }
+    }
   },
-  "nces:schools_under2year_per_100k": {
+  "schools_under2year_per_100k": {
     "category": "Education",
-    "full_name": "nces:schools_under2year_per_100k",
+    "full_name": "schools_under2year_per_100k",
     "measure": "schools_under2year_per_100k",
     "type": "per 100k",
     "short_name": "<2-year schools",
     "long_name": "<2-year schools per 100k people over 14",
     "short_description": "Number of <2-year schools per 100k people over 14, calculated within floating catchment areas.",
     "long_description": "Number of schools authorized to award certificates that are typically obtained in less than 2 years per 100k people over 14, based on 3-step floating catchment areas defined by distance. Catchment areas were calculated using (a) <2-year schools as listed by the National Center for Education Statistics, with supply values of 1, (b) Census block groups, with supply values as the population over the age of 14 as reported the American Community Survey 5-year summaries, and (c) distances between school locations and block group centroids, weighted by a Gaussian function with a scaling parameter set to 18, as calculated by the catchment R package.",
-    "statement": "There are {value} <2-year schools per 100k people over 14 in {features.name}.",
+    "statement": "There are {value} <2-year schools per 100k people over 14 in {region_name}.",
     "equity_category": "Accessibility",
     "citations": [
       "wan12",
@@ -400,14 +365,14 @@
         "name": "National Center for Education Statistics",
         "location": "Integrated Postsecondary Education Data System, Institutional Characteristics",
         "location_url": "https://nces.ed.gov/ipeds/datacenter/DataFiles.aspx",
-        "date_accessed": 2022,
+        "date_accessed": 2023,
         "url": "https://nces.ed.gov"
       },
       {
         "name": "American Community Survey",
         "location": "data/5_year_seq_by_state",
         "location_url": "https://www2.census.gov/programs-surveys/acs/summary_file",
-        "date_accessed": 2022,
+        "date_accessed": 2023,
         "url": "https://www.census.gov/programs-surveys/acs.html"
       },
       {
@@ -415,25 +380,33 @@
         "date_accessed": 2022,
         "url": "http://project-osrm.org"
       }
-    ]
+    ],
+    "layer": {
+      "source": "https://raw.githubusercontent.com/uva-bi-sdad/sdc.education/main/Postsecondary/data/distribution/points_{time}.geojson",
+      "filter": {
+        "feature": "ICLEVEL",
+        "operator": "=",
+        "value": 3
+      }
+    }
   },
-  "nces:schools_under2year_min_drivetime": {
+  "schools_under2year_min_drivetime": {
     "category": "Education",
-    "full_name": "nces:schools_under2year_min_drivetime",
+    "full_name": "schools_under2year_min_drivetime",
     "measure": "schools_under2year_min_drivetime",
     "type": "minutes",
     "short_name": "<2-year school drive time",
     "long_name": "drive time to nearest <2-year school",
     "short_description": "Drive time to the nearest <2-year schools.",
     "long_description": "Minimal drive time to a schools authorized to award certificates that are typically obtained in less than 2 years from the Census block group centroid, as calculated by the Open Source Routing Machine in 2022. School locations are from the National Center for Education Statistics. All distances are calculated at the block group level, then averaged up to higher-level geographies.",
-    "statement": "It takes {value} to drive to a <2-year school from {features.name}'s block group centroids on average.",
+    "statement": "It takes {value} to drive to a <2-year school from {region_name}'s block group centroids on average.",
     "equity_category": "Accessibility",
     "sources": [
       {
         "name": "National Center for Education Statistics",
         "location": "Integrated Postsecondary Education Data System, Institutional Characteristics",
         "location_url": "https://nces.ed.gov/ipeds/datacenter/DataFiles.aspx",
-        "date_accessed": 2022,
+        "date_accessed": 2023,
         "url": "https://nces.ed.gov"
       },
       {
@@ -441,18 +414,26 @@
         "date_accessed": 2022,
         "url": "http://project-osrm.org"
       }
-    ]
+    ],
+    "layer": {
+      "source": "https://raw.githubusercontent.com/uva-bi-sdad/sdc.education/main/Postsecondary/data/distribution/points_{time}.geojson",
+      "filter": {
+        "feature": "ICLEVEL",
+        "operator": "=",
+        "value": 3
+      }
+    }
   },
-  "nces:schools_2year_with_biomedical_program_per_100k": {
+  "schools_2year_with_biomedical_program_per_100k": {
     "category": "Education",
-    "full_name": "nces:schools_2year_with_biomedical_program_per_100k",
+    "full_name": "schools_2year_with_biomedical_program_per_100k",
     "measure": "schools_2year_with_biomedical_program_per_100k",
     "type": "per 100k",
     "short_name": "2-year biomedical programs",
     "long_name": "2-year biomedical programs per 100k people over 14",
     "short_description": "Number of 2-year schools with biomedical programs per 100k people over 14, calculated within floating catchment areas.",
     "long_description": "Number of schools authorized to award Associates degrees or less than 2-year or longer certificates with biomedical programs (any with Classification of Institutional Programs [CIP] codes starting with 26) per 100k people over 14, based on 3-step floating catchment areas defined by distance. Catchment areas were calculated using (a) 2-year schools with any degrees conferred in the given year with a CIP code starting with 26, as listed by the National Center for Education Statistics, with supply values of 1, (b) Census block groups, with supply values as the population over the age of 14 as reported the American Community Survey 5-year summaries, and (c) distances between school locations and block group centroids, weighted by a Gaussian function with a scaling parameter set to 18, as calculated by the catchment R package.",
-    "statement": "There are {value} 2-year schools with a biomedical program per 100k people over 14 in {features.name}.",
+    "statement": "There are {value} 2-year schools with a biomedical program per 100k people over 14 in {region_name}.",
     "equity_category": "Accessibility",
     "citations": [
       "wan12",
@@ -463,14 +444,14 @@
         "name": "National Center for Education Statistics",
         "location": "Integrated Postsecondary Education Data System, Institutional Characteristics and Completions files",
         "location_url": "https://nces.ed.gov/ipeds/datacenter/DataFiles.aspx",
-        "date_accessed": 2022,
+        "date_accessed": 2023,
         "url": "https://nces.ed.gov"
       },
       {
         "name": "American Community Survey",
         "location": "data/5_year_seq_by_state",
         "location_url": "https://www2.census.gov/programs-surveys/acs/summary_file",
-        "date_accessed": 2022,
+        "date_accessed": 2023,
         "url": "https://www.census.gov/programs-surveys/acs.html"
       },
       {
@@ -478,18 +459,33 @@
         "date_accessed": 2022,
         "url": "http://project-osrm.org"
       }
-    ]
+    ],
+    "layer": {
+      "source": "https://raw.githubusercontent.com/uva-bi-sdad/sdc.education/main/Postsecondary/data/distribution/points_{time}.geojson",
+      "filter": [
+        {
+          "feature": "ICLEVEL",
+          "operator": "=",
+          "value": 2
+        },
+        {
+          "feature": "biomedical",
+          "operator": "=",
+          "value": 1
+        }
+      ]
+    }
   },
-  "nces:schools_2year_with_computer_program_per_100k": {
+  "schools_2year_with_computer_program_per_100k": {
     "category": "Education",
-    "full_name": "nces:schools_2year_with_computer_program_per_100k",
+    "full_name": "schools_2year_with_computer_program_per_100k",
     "measure": "schools_2year_with_computer_program_per_100k",
     "type": "per 100k",
     "short_name": "2-year computer science programs",
     "long_name": "2-year computer science programs per 100k people over 14",
     "short_description": "Number of 2-year schools with computer science programs per 100k people over 14, calculated within floating catchment areas.",
     "long_description": "Number of schools authorized to award Associates degrees or less than 2-year or longer certificates with computer science programs (any with Classification of Institutional Programs [CIP] codes starting with 11) per 100k people over 14, based on 3-step floating catchment areas defined by distance. Catchment areas were calculated using (a) 2-year schools with any degrees conferred in the given year with a CIP code starting with 11, as listed by the National Center for Education Statistics, with supply values of 1, (b) Census block groups, with supply values as the population over the age of 14 as reported the American Community Survey 5-year summaries, and (c) distances between school locations and block group centroids, weighted by a Gaussian function with a scaling parameter set to 18, as calculated by the catchment R package.",
-    "statement": "There are {value} 2-year schools with a computer science program per 100k people over 14 in {features.name}.",
+    "statement": "There are {value} 2-year schools with a computer science program per 100k people over 14 in {region_name}.",
     "equity_category": "Accessibility",
     "citations": [
       "wan12",
@@ -500,14 +496,14 @@
         "name": "National Center for Education Statistics",
         "location": "Integrated Postsecondary Education Data System, Institutional Characteristics and Completions files",
         "location_url": "https://nces.ed.gov/ipeds/datacenter/DataFiles.aspx",
-        "date_accessed": 2022,
+        "date_accessed": 2023,
         "url": "https://nces.ed.gov"
       },
       {
         "name": "American Community Survey",
         "location": "data/5_year_seq_by_state",
         "location_url": "https://www2.census.gov/programs-surveys/acs/summary_file",
-        "date_accessed": 2022,
+        "date_accessed": 2023,
         "url": "https://www.census.gov/programs-surveys/acs.html"
       },
       {
@@ -515,18 +511,33 @@
         "date_accessed": 2022,
         "url": "http://project-osrm.org"
       }
-    ]
+    ],
+    "layer": {
+      "source": "https://raw.githubusercontent.com/uva-bi-sdad/sdc.education/main/Postsecondary/data/distribution/points_{time}.geojson",
+      "filter": [
+        {
+          "feature": "ICLEVEL",
+          "operator": "=",
+          "value": 2
+        },
+        {
+          "feature": "computer",
+          "operator": "=",
+          "value": 1
+        }
+      ]
+    }
   },
-  "nces:schools_2year_with_engineering_program_per_100k": {
+  "schools_2year_with_engineering_program_per_100k": {
     "category": "Education",
-    "full_name": "nces:schools_2year_with_engineering_program_per_100k",
+    "full_name": "schools_2year_with_engineering_program_per_100k",
     "measure": "schools_2year_with_engineering_program_per_100k",
     "type": "per 100k",
     "short_name": "2-year engineering or related programs",
     "long_name": "2-year engineering or related programs per 100k people over 14",
     "short_description": "Number of 2-year schools with engineering or related programs per 100k people over 14, calculated within floating catchment areas.",
     "long_description": "Number of schools authorized to award Associates degrees or less than 2-year or longer certificates with engineering or related programs (any with Classification of Institutional Programs [CIP] codes starting with 14 or 15) per 100k people over 14, based on 3-step floating catchment areas defined by distance. Catchment areas were calculated using (a) 2-year schools with any degrees conferred in the given year with a CIP code starting with 14 or 15, as listed by the National Center for Education Statistics, with supply values of 1, (b) Census block groups, with supply values as the population over the age of 14 as reported the American Community Survey 5-year summaries, and (c) distances between school locations and block group centroids, weighted by a Gaussian function with a scaling parameter set to 18, as calculated by the catchment R package.",
-    "statement": "There are {value} 2-year schools with a engineering or related program per 100k people over 14 in {features.name}.",
+    "statement": "There are {value} 2-year schools with a engineering or related program per 100k people over 14 in {region_name}.",
     "equity_category": "Accessibility",
     "citations": [
       "wan12",
@@ -537,14 +548,14 @@
         "name": "National Center for Education Statistics",
         "location": "Integrated Postsecondary Education Data System, Institutional Characteristics and Completions files",
         "location_url": "https://nces.ed.gov/ipeds/datacenter/DataFiles.aspx",
-        "date_accessed": 2022,
+        "date_accessed": 2023,
         "url": "https://nces.ed.gov"
       },
       {
         "name": "American Community Survey",
         "location": "data/5_year_seq_by_state",
         "location_url": "https://www2.census.gov/programs-surveys/acs/summary_file",
-        "date_accessed": 2022,
+        "date_accessed": 2023,
         "url": "https://www.census.gov/programs-surveys/acs.html"
       },
       {
@@ -552,18 +563,33 @@
         "date_accessed": 2022,
         "url": "http://project-osrm.org"
       }
-    ]
+    ],
+    "layer": {
+      "source": "https://raw.githubusercontent.com/uva-bi-sdad/sdc.education/main/Postsecondary/data/distribution/points_{time}.geojson",
+      "filter": [
+        {
+          "feature": "ICLEVEL",
+          "operator": "=",
+          "value": 2
+        },
+        {
+          "feature": "engineering",
+          "operator": "=",
+          "value": 1
+        }
+      ]
+    }
   },
-  "nces:schools_2year_with_physical_program_per_100k": {
+  "schools_2year_with_physical_program_per_100k": {
     "category": "Education",
-    "full_name": "nces:schools_2year_with_physical_program_per_100k",
+    "full_name": "schools_2year_with_physical_program_per_100k",
     "measure": "schools_2year_with_physical_program_per_100k",
     "type": "per 100k",
     "short_name": "2-year physical science programs",
     "long_name": "2-year physical science programs per 100k people over 14",
     "short_description": "Number of 2-year schools with physical science programs per 100k people over 14, calculated within floating catchment areas.",
     "long_description": "Number of schools authorized to award Associates degrees or less than 2-year or longer certificates with physical science programs (any with Classification of Institutional Programs [CIP] codes starting with 40) per 100k people over 14, based on 3-step floating catchment areas defined by distance. Catchment areas were calculated using (a) 2-year schools with any degrees conferred in the given year with a CIP code starting with 40, as listed by the National Center for Education Statistics, with supply values of 1, (b) Census block groups, with supply values as the population over the age of 14 as reported the American Community Survey 5-year summaries, and (c) distances between school locations and block group centroids, weighted by a Gaussian function with a scaling parameter set to 18, as calculated by the catchment R package.",
-    "statement": "There are {value} 2-year schools with a physical science program per 100k people over 14 in {features.name}.",
+    "statement": "There are {value} 2-year schools with a physical science program per 100k people over 14 in {region_name}.",
     "equity_category": "Accessibility",
     "citations": [
       "wan12",
@@ -574,14 +600,14 @@
         "name": "National Center for Education Statistics",
         "location": "Integrated Postsecondary Education Data System, Institutional Characteristics and Completions files",
         "location_url": "https://nces.ed.gov/ipeds/datacenter/DataFiles.aspx",
-        "date_accessed": 2022,
+        "date_accessed": 2023,
         "url": "https://nces.ed.gov"
       },
       {
         "name": "American Community Survey",
         "location": "data/5_year_seq_by_state",
         "location_url": "https://www2.census.gov/programs-surveys/acs/summary_file",
-        "date_accessed": 2022,
+        "date_accessed": 2023,
         "url": "https://www.census.gov/programs-surveys/acs.html"
       },
       {
@@ -589,18 +615,33 @@
         "date_accessed": 2022,
         "url": "http://project-osrm.org"
       }
-    ]
+    ],
+    "layer": {
+      "source": "https://raw.githubusercontent.com/uva-bi-sdad/sdc.education/main/Postsecondary/data/distribution/points_{time}.geojson",
+      "filter": [
+        {
+          "feature": "ICLEVEL",
+          "operator": "=",
+          "value": 2
+        },
+        {
+          "feature": "physical",
+          "operator": "=",
+          "value": 1
+        }
+      ]
+    }
   },
-  "nces:schools_2year_with_science_program_per_100k": {
+  "schools_2year_with_science_program_per_100k": {
     "category": "Education",
-    "full_name": "nces:schools_2year_with_science_program_per_100k",
+    "full_name": "schools_2year_with_science_program_per_100k",
     "measure": "schools_2year_with_science_program_per_100k",
     "type": "per 100k",
     "short_name": "2-year science programs",
     "long_name": "2-year science programs per 100k people over 14",
     "short_description": "Number of 2-year schools with science programs per 100k people over 14, calculated within floating catchment areas.",
     "long_description": "Number of schools authorized to award Associates degrees or less than 2-year or longer certificates with science programs (any with Classification of Institutional Programs [CIP] codes starting with 41) per 100k people over 14, based on 3-step floating catchment areas defined by distance. Catchment areas were calculated using (a) 2-year schools with any degrees conferred in the given year with a CIP code starting with 41, as listed by the National Center for Education Statistics, with supply values of 1, (b) Census block groups, with supply values as the population over the age of 14 as reported the American Community Survey 5-year summaries, and (c) distances between school locations and block group centroids, weighted by a Gaussian function with a scaling parameter set to 18, as calculated by the catchment R package.",
-    "statement": "There are {value} 2-year schools with a science program per 100k people over 14 in {features.name}.",
+    "statement": "There are {value} 2-year schools with a science program per 100k people over 14 in {region_name}.",
     "equity_category": "Accessibility",
     "citations": [
       "wan12",
@@ -611,14 +652,14 @@
         "name": "National Center for Education Statistics",
         "location": "Integrated Postsecondary Education Data System, Institutional Characteristics and Completions files",
         "location_url": "https://nces.ed.gov/ipeds/datacenter/DataFiles.aspx",
-        "date_accessed": 2022,
+        "date_accessed": 2023,
         "url": "https://nces.ed.gov"
       },
       {
         "name": "American Community Survey",
         "location": "data/5_year_seq_by_state",
         "location_url": "https://www2.census.gov/programs-surveys/acs/summary_file",
-        "date_accessed": 2022,
+        "date_accessed": 2023,
         "url": "https://www.census.gov/programs-surveys/acs.html"
       },
       {
@@ -626,9 +667,66 @@
         "date_accessed": 2022,
         "url": "http://project-osrm.org"
       }
+    ],
+    "layer": {
+      "source": "https://raw.githubusercontent.com/uva-bi-sdad/sdc.education/main/Postsecondary/data/distribution/points_{time}.geojson",
+      "filter": [
+        {
+          "feature": "ICLEVEL",
+          "operator": "=",
+          "value": 2
+        },
+        {
+          "feature": "science",
+          "operator": "=",
+          "value": 1
+        }
+      ]
+    }
+  },
+  "acs_postsecondary_percent": {
+    "category": "Education",
+    "full_name": "acs_postsecondary_percent",
+    "measure": "acs_postsecondary_percent",
+    "type": "percent",
+    "short_name": "Postsecondary Education (percent)",
+    "long_name": "Estimated Percentage of Population With Any Postsecondary Education",
+    "short_description": "Percentage of the population who reported any postsecondary education.",
+    "long_description": "Percentage of the population who reported any postsecondary education, according to the U.S. Census American Community Survey 5-year estimates.",
+    "statement": "{value} of those in {region_name} report any postsecondary education.",
+    "equity_category": "Status",
+    "sources": [
+      {
+        "name": "U.S. Census, American Community Survey",
+        "location": "5-Year estimates, table B06009, via the API",
+        "location_url": "https://www.census.gov/data/developers/data-sets/acs-5year.html",
+        "date_accessed": 2023,
+        "url": "https://www.census.gov/programs-surveys/acs.html"
+      }
     ]
   },
-  "3rd_grade_mean_median_read_score:median_read_pass_rate": {
+  "acs_postsecondary_count": {
+    "category": "Education",
+    "full_name": "acs_postsecondary_count",
+    "measure": "acs_postsecondary_count",
+    "type": "count",
+    "short_name": "Postsecondary Education (count)",
+    "long_name": "Estimated Number of People With Any Postsecondary Education",
+    "short_description": "Number of people who reported any postsecondary education.",
+    "long_description": "Number of people who reported any postsecondary education, according to the U.S. Census American Community Survey 5-year estimates.",
+    "statement": "In {region_name}, {value} report any postsecondary education.",
+    "equity_category": "Status",
+    "sources": [
+      {
+        "name": "U.S. Census, American Community Survey",
+        "location": "5-Year estimates, table B06009, via the API",
+        "location_url": "https://www.census.gov/data/developers/data-sets/acs-5year.html",
+        "date_accessed": 2023,
+        "url": "https://www.census.gov/programs-surveys/acs.html"
+      }
+    ]
+  },
+  "median_read_pass_rate": {
     "category": "Education",
     "measure_table": "dc_education_training.va_hdct_vdoe_2019_2021_3rd_grade_median_read_score",
     "full_name": "3rd_grade_mean_median_read_score:median_read_pass_rate",
@@ -638,17 +736,19 @@
     "long_name": "Median percentage of 3rd graders passing reading test",
     "short_description": "Median percentage of 3rd grade population passing reading test for schools in the region",
     "long_description": "Median percentage of 3rd grade population passing reading test. The median is calculated across schools in the region.",
-    "statement": "On average, {value} of 3rd graders pass reading in {features.name}.",
+    "statement": "On average, {value} of 3rd graders pass reading in {region_name}.",
     "equity_category": "Status",
     "sources": [
       {
         "name": "Virginia Department of Education",
+        "location": "Data & Reports > Statistics & Reports > SOL Test Pass Rates & Other Results",
+        "location_url": "https://www.doe.virginia.gov/data-policy-funding/data-reports/statistics-reports/sol-test-pass-rates-other-results",
         "date_accessed": 2021,
-        "url": "https://www.doe.virginia.gov/statistics_reports/sol-pass-rates/index.shtml"
+        "url": "https://www.doe.virginia.gov"
       }
     ]
   },
-  "3rd_grade_mean_median_read_score:mean_read_pass_rate": {
+  "mean_read_pass_rate": {
     "category": "Education",
     "measure_table": "dc_education_training.va_hdct_vdoe_2019_2021_3rd_grade_median_read_score",
     "full_name": "3rd_grade_mean_median_read_score:mean_read_pass_rate",
@@ -658,13 +758,15 @@
     "long_name": "Mean percentage of 3rd graders passing reading test",
     "short_description": "Mean percentage of 3rd grade population passing reading test for schools in the region",
     "long_description": "Mean percentage of 3rd grade population passing reading test. The median is calculated across schools in the region.",
-    "statement": "In most regions, {value} of 3rd graders pass reading in {features.name}.",
+    "statement": "In most regions, {value} of 3rd graders pass reading in {region_name}.",
     "equity_category": "Status",
     "sources": [
       {
         "name": "Virginia Department of Education",
+        "location": "Data & Reports > Statistics & Reports > SOL Test Pass Rates & Other Results",
+        "location_url": "https://www.doe.virginia.gov/data-policy-funding/data-reports/statistics-reports/sol-test-pass-rates-other-results",
         "date_accessed": 2021,
-        "url": "https://www.doe.virginia.gov/statistics_reports/sol-pass-rates/index.shtml"
+        "url": "https://www.doe.virginia.gov"
       }
     ]
   }
