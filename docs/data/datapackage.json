@@ -9,10 +9,10 @@
   },
   "resources": [
     {
-      "bytes": 3949004,
+      "bytes": 3935812,
       "encoding": "ISO-8859-1",
-      "md5": "28a4c6f0d76ba900d2193265223a6875",
-      "format": "education_dev/docs/data/block_group",
+      "md5": "e4f8dc289989bbbea27a6aeb60b08e93",
+      "format": "csv",
       "name": "block_group",
       "filename": "block_group.csv.xz",
       "source": [],
@@ -25,15 +25,15 @@
       "id_length": 12,
       "time": "time",
       "profile": "data-resource",
-      "created": "2023-01-17 06:54:13",
+      "created": "2023-02-09 07:48:45",
       "last_modified": "2022-09-15 21:22:22",
-      "row_count": 111864,
-      "entity_count": 9322,
+      "row_count": 111780,
+      "entity_count": 9315,
       "schema": {
         "fields": [
           {
             "name": "time",
-            "duplicates": 111852,
+            "duplicates": 111768,
             "time_range": [0, 11],
             "type": "integer",
             "missing": 0,
@@ -44,7 +44,7 @@
           },
           {
             "name": "daycare_min_drivetime",
-            "duplicates": 111527,
+            "duplicates": 111443,
             "info": {
               "category": "Education",
               "full_name": "daycare_min_drivetime",
@@ -76,7 +76,7 @@
             },
             "time_range": [11, 11],
             "type": "float",
-            "missing": 105913,
+            "missing": 105829,
             "mean": 5.556629,
             "sd": 6.541373,
             "min": 0,
@@ -84,7 +84,7 @@
           },
           {
             "name": "daycare_capacity",
-            "duplicates": 111408,
+            "duplicates": 111324,
             "info": {
               "category": "Education",
               "full_name": "daycare_capacity",
@@ -111,7 +111,7 @@
             },
             "time_range": [11, 11],
             "type": "integer",
-            "missing": 105913,
+            "missing": 105829,
             "mean": 57.890775,
             "sd": 107.740453,
             "min": 0,
@@ -119,7 +119,7 @@
           },
           {
             "name": "daycare_per_1k",
-            "duplicates": 105912,
+            "duplicates": 105828,
             "info": {
               "category": "Education",
               "full_name": "daycare_per_1k",
@@ -174,7 +174,7 @@
             },
             "time_range": [11, 11],
             "type": "float",
-            "missing": 105913,
+            "missing": 105829,
             "mean": 129.680499,
             "sd": 58.468622,
             "min": 0,
@@ -182,7 +182,7 @@
           },
           {
             "name": "daycare_over_4_per_1k",
-            "duplicates": 105912,
+            "duplicates": 105828,
             "info": {
               "category": "Education",
               "full_name": "daycare_over_4_per_1k",
@@ -230,7 +230,7 @@
             },
             "time_range": [11, 11],
             "type": "float",
-            "missing": 105913,
+            "missing": 105829,
             "mean": 38.819043,
             "sd": 32.039847,
             "min": 0,
@@ -238,7 +238,7 @@
           },
           {
             "name": "daycare_under_10_per_1k",
-            "duplicates": 105912,
+            "duplicates": 105828,
             "info": {
               "category": "Education",
               "full_name": "daycare_under_10_per_1k",
@@ -286,7 +286,7 @@
             },
             "time_range": [11, 11],
             "type": "float",
-            "missing": 105913,
+            "missing": 105829,
             "mean": 54.252637,
             "sd": 26.880092,
             "min": 0,
@@ -294,7 +294,7 @@
           },
           {
             "name": "acs_postsecondary_count",
-            "duplicates": 111863,
+            "duplicates": 111779,
             "info": {
               "category": "Education",
               "full_name": "acs_postsecondary_count",
@@ -318,11 +318,11 @@
             },
             "time_range": [-1, -1],
             "type": "unknown",
-            "missing": 111864
+            "missing": 111780
           },
           {
             "name": "acs_postsecondary_percent",
-            "duplicates": 111863,
+            "duplicates": 111779,
             "info": {
               "category": "Education",
               "full_name": "acs_postsecondary_percent",
@@ -346,11 +346,11 @@
             },
             "time_range": [-1, -1],
             "type": "unknown",
-            "missing": 111864
+            "missing": 111780
           },
           {
             "name": "schools_2year_min_drivetime",
-            "duplicates": 111108,
+            "duplicates": 111024,
             "info": {
               "category": "Education",
               "full_name": "schools_2year_min_drivetime",
@@ -387,15 +387,15 @@
             },
             "time_range": [3, 11],
             "type": "float",
-            "missing": 45600,
-            "mean": 19.488105,
-            "sd": 14.206705,
+            "missing": 45748,
+            "mean": 19.489646,
+            "sd": 14.211376,
             "min": 0.3,
             "max": 96.5
           },
           {
             "name": "schools_under2year_min_drivetime",
-            "duplicates": 110717,
+            "duplicates": 110633,
             "info": {
               "category": "Education",
               "full_name": "schools_under2year_min_drivetime",
@@ -432,15 +432,15 @@
             },
             "time_range": [3, 11],
             "type": "float",
-            "missing": 45600,
-            "mean": 24.336287,
-            "sd": 23.239805,
+            "missing": 45748,
+            "mean": 24.310068,
+            "sd": 23.218725,
             "min": 0.1,
             "max": 145.9
           },
           {
             "name": "schools_2year_per_100k",
-            "duplicates": 45602,
+            "duplicates": 45750,
             "info": {
               "category": "Education",
               "full_name": "schools_2year_per_100k",
@@ -488,15 +488,15 @@
             },
             "time_range": [3, 11],
             "type": "float",
-            "missing": 45600,
-            "mean": 0.772452,
-            "sd": 0.938108,
+            "missing": 45748,
+            "mean": 0.758598,
+            "sd": 0.901641,
             "min": 0,
-            "max": 10.264128
+            "max": 9.32679
           },
           {
             "name": "schools_under2year_per_100k",
-            "duplicates": 45601,
+            "duplicates": 45749,
             "info": {
               "category": "Education",
               "full_name": "schools_under2year_per_100k",
@@ -544,15 +544,15 @@
             },
             "time_range": [3, 11],
             "type": "float",
-            "missing": 45600,
-            "mean": 0.641729,
-            "sd": 0.538459,
+            "missing": 45748,
+            "mean": 0.63526,
+            "sd": 0.531544,
             "min": 0,
-            "max": 3.888842
+            "max": 3.819872
           },
           {
             "name": "schools_2year_with_biomedical_program_per_100k",
-            "duplicates": 45601,
+            "duplicates": 45749,
             "info": {
               "category": "Education",
               "full_name": "schools_2year_with_biomedical_program_per_100k",
@@ -607,15 +607,15 @@
             },
             "time_range": [3, 11],
             "type": "float",
-            "missing": 45600,
-            "mean": 0.008283,
-            "sd": 0.080744,
+            "missing": 45748,
+            "mean": 0.008247,
+            "sd": 0.080539,
             "min": 0,
-            "max": 3.805671
+            "max": 3.692639
           },
           {
             "name": "schools_2year_with_computer_program_per_100k",
-            "duplicates": 45601,
+            "duplicates": 45749,
             "info": {
               "category": "Education",
               "full_name": "schools_2year_with_computer_program_per_100k",
@@ -670,15 +670,15 @@
             },
             "time_range": [3, 11],
             "type": "float",
-            "missing": 45600,
-            "mean": 0.447128,
-            "sd": 0.824465,
+            "missing": 45748,
+            "mean": 0.436565,
+            "sd": 0.784082,
             "min": 0,
-            "max": 10.264128
+            "max": 9.212101
           },
           {
             "name": "schools_2year_with_engineering_program_per_100k",
-            "duplicates": 45602,
+            "duplicates": 45750,
             "info": {
               "category": "Education",
               "full_name": "schools_2year_with_engineering_program_per_100k",
@@ -733,15 +733,15 @@
             },
             "time_range": [3, 11],
             "type": "float",
-            "missing": 45600,
-            "mean": 0.410993,
-            "sd": 0.867426,
+            "missing": 45748,
+            "mean": 0.400928,
+            "sd": 0.827949,
             "min": 0,
-            "max": 10.264128
+            "max": 9.32679
           },
           {
             "name": "schools_2year_with_physical_program_per_100k",
-            "duplicates": 45618,
+            "duplicates": 45766,
             "info": {
               "category": "Education",
               "full_name": "schools_2year_with_physical_program_per_100k",
@@ -796,15 +796,15 @@
             },
             "time_range": [3, 11],
             "type": "float",
-            "missing": 45600,
-            "mean": 0.014879,
-            "sd": 0.129643,
+            "missing": 45748,
+            "mean": 0.014741,
+            "sd": 0.128408,
             "min": 0,
-            "max": 2.817995
+            "max": 2.775442
           },
           {
             "name": "schools_2year_with_science_program_per_100k",
-            "duplicates": 45602,
+            "duplicates": 45750,
             "info": {
               "category": "Education",
               "full_name": "schools_2year_with_science_program_per_100k",
@@ -859,15 +859,15 @@
             },
             "time_range": [3, 11],
             "type": "float",
-            "missing": 45600,
-            "mean": 0.066405,
-            "sd": 0.199597,
+            "missing": 45748,
+            "mean": 0.065751,
+            "sd": 0.197112,
             "min": 0,
-            "max": 5.735055
+            "max": 5.610108
           },
           {
             "name": "mean_read_pass_rate",
-            "duplicates": 111863,
+            "duplicates": 111779,
             "info": {
               "category": "Education",
               "measure_table": "dc_education_training.va_hdct_vdoe_2019_2021_3rd_grade_median_read_score",
@@ -892,11 +892,11 @@
             },
             "time_range": [-1, -1],
             "type": "unknown",
-            "missing": 111864
+            "missing": 111780
           },
           {
             "name": "median_read_pass_rate",
-            "duplicates": 111863,
+            "duplicates": 111779,
             "info": {
               "category": "Education",
               "measure_table": "dc_education_training.va_hdct_vdoe_2019_2021_3rd_grade_median_read_score",
@@ -921,7 +921,7 @@
             },
             "time_range": [-1, -1],
             "type": "unknown",
-            "missing": 111864
+            "missing": 111780
           }
         ]
       },
@@ -997,13 +997,13 @@
           "url": "https://github.com/uva-bi-sdad/catchment"
         }
       },
-      "sha512": "4af8af08d082d99f6a7d0106cef4e6f51c5ddd6df85b186a0a6be85fa08ae8164e58a890eb1fec1a41025a7a5c2774dd0fc3a553d6f576ae459438bca00ac0e1"
+      "sha512": "910197ca940f480abd14ed4e6ba24e6675704b1f8d8f6de085a706704d262a0a8915000b5a4038bc84ea85ddfec05a7f9ae3c1581607c8daa964f4d5e468f70d"
     },
     {
-      "bytes": 102012,
+      "bytes": 101956,
       "encoding": "ISO-8859-1",
-      "md5": "ba95cfc3139cecfcfd1e493b9b9f9753",
-      "format": "education_dev/docs/data/county",
+      "md5": "b443704e79f7825462cd8e4772bedbff",
+      "format": "csv",
       "name": "county",
       "filename": "county.csv.xz",
       "source": [],
@@ -1016,7 +1016,7 @@
       "id_length": 5,
       "time": "time",
       "profile": "data-resource",
-      "created": "2023-01-17 06:54:13",
+      "created": "2023-02-09 07:48:45",
       "last_modified": "2022-09-15 21:22:22",
       "row_count": 1908,
       "entity_count": 159,
@@ -1488,10 +1488,10 @@
             "time_range": [3, 11],
             "type": "float",
             "missing": 666,
-            "mean": 1.04704,
-            "sd": 1.242723,
+            "mean": 1.033537,
+            "sd": 1.224881,
             "min": 0.000097,
-            "max": 7.197783
+            "max": 7.132401
           },
           {
             "name": "schools_under2year_per_100k",
@@ -1544,10 +1544,10 @@
             "time_range": [3, 11],
             "type": "float",
             "missing": 666,
-            "mean": 0.351121,
-            "sd": 0.531618,
+            "mean": 0.347032,
+            "sd": 0.524426,
             "min": 0,
-            "max": 3.425495
+            "max": 3.365109
           },
           {
             "name": "schools_2year_with_biomedical_program_per_100k",
@@ -1607,8 +1607,8 @@
             "time_range": [3, 11],
             "type": "float",
             "missing": 666,
-            "mean": 0.012282,
-            "sd": 0.102498,
+            "mean": 0.012252,
+            "sd": 0.102419,
             "min": 0,
             "max": 1.503835
           },
@@ -1670,10 +1670,10 @@
             "time_range": [3, 11],
             "type": "float",
             "missing": 666,
-            "mean": 0.77091,
-            "sd": 1.167707,
+            "mean": 0.760732,
+            "sd": 1.150669,
             "min": 0,
-            "max": 7.197783
+            "max": 7.132401
           },
           {
             "name": "schools_2year_with_engineering_program_per_100k",
@@ -1733,10 +1733,10 @@
             "time_range": [3, 11],
             "type": "float",
             "missing": 666,
-            "mean": 0.787078,
-            "sd": 1.213428,
+            "mean": 0.776799,
+            "sd": 1.19623,
             "min": 0.000094,
-            "max": 7.197783
+            "max": 7.132401
           },
           {
             "name": "schools_2year_with_physical_program_per_100k",
@@ -1796,10 +1796,10 @@
             "time_range": [3, 11],
             "type": "float",
             "missing": 666,
-            "mean": 0.034056,
-            "sd": 0.177067,
+            "mean": 0.033677,
+            "sd": 0.175037,
             "min": 0,
-            "max": 1.532839
+            "max": 1.503835
           },
           {
             "name": "schools_2year_with_science_program_per_100k",
@@ -1859,10 +1859,10 @@
             "time_range": [3, 11],
             "type": "float",
             "missing": 666,
-            "mean": 0.052187,
-            "sd": 0.239628,
+            "mean": 0.051454,
+            "sd": 0.235251,
             "min": 0,
-            "max": 4.205769
+            "max": 4.114831
           },
           {
             "name": "mean_read_pass_rate",
@@ -2004,13 +2004,13 @@
           "url": "https://github.com/uva-bi-sdad/catchment"
         }
       },
-      "sha512": "5a41e49af20d675776535e4a861bdfc927440850699b4f99b11d67e6607555ea2c25e32acade1d4cddf5bfbd279d49eb02b489786011f21dc6050972d9731d80"
+      "sha512": "fa1c8b56dd0e233297a0d6f9c8d3a90223a2c3a4160ddda0970d43ba4072bc700782af01638f62b09c0cde5605cf6d99548588eaccc22a0d8cbee5f6c6a3243e"
     },
     {
-      "bytes": 28248,
+      "bytes": 28224,
       "encoding": "ISO-8859-1",
-      "md5": "d08175156a63352debd1fc62a0066326",
-      "format": "education_dev/docs/data/health_district",
+      "md5": "11487b25a44d7fc8edca8cb7313dac1f",
+      "format": "csv",
       "name": "health_district",
       "filename": "health_district.csv.xz",
       "source": [],
@@ -2023,7 +2023,7 @@
       "id_length": 8,
       "time": "time",
       "profile": "data-resource",
-      "created": "2023-01-17 06:54:13",
+      "created": "2023-02-09 07:48:45",
       "last_modified": "2022-09-15 21:22:22",
       "row_count": 444,
       "entity_count": 37,
@@ -2495,10 +2495,10 @@
             "time_range": [3, 11],
             "type": "float",
             "missing": 129,
-            "mean": 1.047326,
-            "sd": 0.636573,
+            "mean": 1.033845,
+            "sd": 0.625396,
             "min": 0.108987,
-            "max": 3.416793
+            "max": 3.320392
           },
           {
             "name": "schools_under2year_per_100k",
@@ -2551,10 +2551,10 @@
             "time_range": [3, 11],
             "type": "float",
             "missing": 129,
-            "mean": 0.51793,
-            "sd": 0.432954,
-            "min": 0.000055,
-            "max": 1.761301
+            "mean": 0.512138,
+            "sd": 0.427678,
+            "min": 0.000053,
+            "max": 1.739674
           },
           {
             "name": "schools_2year_with_biomedical_program_per_100k",
@@ -2614,8 +2614,8 @@
             "time_range": [3, 11],
             "type": "float",
             "missing": 129,
-            "mean": 0.009363,
-            "sd": 0.071861,
+            "mean": 0.009319,
+            "sd": 0.071779,
             "min": 0,
             "max": 0.729264
           },
@@ -2677,10 +2677,10 @@
             "time_range": [3, 11],
             "type": "float",
             "missing": 129,
-            "mean": 0.629807,
-            "sd": 0.531,
-            "min": 0.000218,
-            "max": 3.283494
+            "mean": 0.621643,
+            "sd": 0.523367,
+            "min": 0.000219,
+            "max": 3.208054
           },
           {
             "name": "schools_2year_with_engineering_program_per_100k",
@@ -2740,10 +2740,10 @@
             "time_range": [3, 11],
             "type": "float",
             "missing": 129,
-            "mean": 0.661582,
-            "sd": 0.653894,
-            "min": 0.008476,
-            "max": 3.415991
+            "mean": 0.652723,
+            "sd": 0.643254,
+            "min": 0.008347,
+            "max": 3.31965
           },
           {
             "name": "schools_2year_with_physical_program_per_100k",
@@ -2803,10 +2803,10 @@
             "time_range": [3, 11],
             "type": "float",
             "missing": 129,
-            "mean": 0.023731,
-            "sd": 0.123625,
+            "mean": 0.023483,
+            "sd": 0.122311,
             "min": 0,
-            "max": 0.759109
+            "max": 0.747397
           },
           {
             "name": "schools_2year_with_science_program_per_100k",
@@ -2866,10 +2866,10 @@
             "time_range": [3, 11],
             "type": "float",
             "missing": 129,
-            "mean": 0.056118,
-            "sd": 0.188231,
+            "mean": 0.055355,
+            "sd": 0.184999,
             "min": 0,
-            "max": 1.675349
+            "max": 1.635468
           },
           {
             "name": "mean_read_pass_rate",
@@ -3011,13 +3011,13 @@
           "url": "https://github.com/uva-bi-sdad/catchment"
         }
       },
-      "sha512": "ba73d11b03539b7b289ea5333408e14876ebdc16748cf29ac798b0bc8ae15383e786ec415735ad8b2abfd81cbcbc441453c6e3cb77345f765aaff9f2a0be3d18"
+      "sha512": "aa1baf0a039718d1b1b102e9f3a7756009576006ccceeeef542050d56d5a939e93c9f774dd4c7837d46c5597f837a3a718077ccdcace98de45f3d6db88075cac"
     },
     {
       "bytes": 3136,
       "encoding": "ISO-8859-1",
       "md5": "4928a39c23888c91e313537ce0a0d6d9",
-      "format": "education_dev/docs/data/school_district",
+      "format": "csv",
       "name": "school_district",
       "filename": "school_district.csv.xz",
       "source": [],
@@ -3030,7 +3030,7 @@
       "id_length": 7,
       "time": "time",
       "profile": "data-resource",
-      "created": "2023-01-17 06:54:13",
+      "created": "2023-02-09 07:48:45",
       "last_modified": "2022-09-15 21:22:22",
       "row_count": 1392,
       "entity_count": 116,
@@ -3957,10 +3957,10 @@
       "sha512": "c4c81b0f86a6512457b0bbdf2a80372c72491aa3638e02b81bfbbf42935cf5f1b2651da4b22b8a26e71280e90a472e1ed85acbbbb956b4dfb97fa16593cf3d59"
     },
     {
-      "bytes": 1890868,
+      "bytes": 1897256,
       "encoding": "ISO-8859-1",
-      "md5": "ec446ca0867f71c5a4ef0c35bf55e9f1",
-      "format": "education_dev/docs/data/tract",
+      "md5": "568ae5877aadc0c0d6bb2d9d8ee3fc92",
+      "format": "csv",
       "name": "tract",
       "filename": "tract.csv.xz",
       "source": [],
@@ -3973,7 +3973,7 @@
       "id_length": 11,
       "time": "time",
       "profile": "data-resource",
-      "created": "2023-01-17 06:54:18",
+      "created": "2023-02-09 07:48:50",
       "last_modified": "2022-09-15 21:22:22",
       "row_count": 51408,
       "entity_count": 4284,
@@ -4396,7 +4396,7 @@
           },
           {
             "name": "schools_2year_per_100k",
-            "duplicates": 27503,
+            "duplicates": 27501,
             "info": {
               "category": "Education",
               "full_name": "schools_2year_per_100k",
@@ -4445,14 +4445,14 @@
             "time_range": [3, 11],
             "type": "float",
             "missing": 27317,
-            "mean": 0.754676,
-            "sd": 0.856546,
+            "mean": 0.746132,
+            "sd": 0.844653,
             "min": 0,
-            "max": 9.967762
+            "max": 9.742892
           },
           {
             "name": "schools_under2year_per_100k",
-            "duplicates": 27503,
+            "duplicates": 27501,
             "info": {
               "category": "Education",
               "full_name": "schools_under2year_per_100k",
@@ -4501,14 +4501,14 @@
             "time_range": [3, 11],
             "type": "float",
             "missing": 27317,
-            "mean": 0.639261,
-            "sd": 0.520376,
+            "mean": 0.632674,
+            "sd": 0.513659,
             "min": 0,
-            "max": 3.669448
+            "max": 3.606443
           },
           {
             "name": "schools_2year_with_biomedical_program_per_100k",
-            "duplicates": 27503,
+            "duplicates": 27501,
             "info": {
               "category": "Education",
               "full_name": "schools_2year_with_biomedical_program_per_100k",
@@ -4564,14 +4564,14 @@
             "time_range": [3, 11],
             "type": "float",
             "missing": 27317,
-            "mean": 0.008472,
-            "sd": 0.077777,
+            "mean": 0.008423,
+            "sd": 0.07761,
             "min": 0,
             "max": 2.200135
           },
           {
             "name": "schools_2year_with_computer_program_per_100k",
-            "duplicates": 27503,
+            "duplicates": 27501,
             "info": {
               "category": "Education",
               "full_name": "schools_2year_with_computer_program_per_100k",
@@ -4627,14 +4627,14 @@
             "time_range": [3, 11],
             "type": "float",
             "missing": 27317,
-            "mean": 0.426845,
-            "sd": 0.736011,
+            "mean": 0.421774,
+            "sd": 0.726097,
             "min": 0,
-            "max": 9.967762
+            "max": 9.742892
           },
           {
             "name": "schools_2year_with_engineering_program_per_100k",
-            "duplicates": 27503,
+            "duplicates": 27501,
             "info": {
               "category": "Education",
               "full_name": "schools_2year_with_engineering_program_per_100k",
@@ -4690,14 +4690,14 @@
             "time_range": [3, 11],
             "type": "float",
             "missing": 27317,
-            "mean": 0.386375,
-            "sd": 0.76993,
+            "mean": 0.381841,
+            "sd": 0.759693,
             "min": 0,
-            "max": 9.967762
+            "max": 9.742892
           },
           {
             "name": "schools_2year_with_physical_program_per_100k",
-            "duplicates": 27503,
+            "duplicates": 27501,
             "info": {
               "category": "Education",
               "full_name": "schools_2year_with_physical_program_per_100k",
@@ -4753,14 +4753,14 @@
             "time_range": [3, 11],
             "type": "float",
             "missing": 27317,
-            "mean": 0.015209,
-            "sd": 0.129083,
+            "mean": 0.015044,
+            "sd": 0.127639,
             "min": 0,
-            "max": 2.368502
+            "max": 2.328086
           },
           {
             "name": "schools_2year_with_science_program_per_100k",
-            "duplicates": 27503,
+            "duplicates": 27501,
             "info": {
               "category": "Education",
               "full_name": "schools_2year_with_science_program_per_100k",
@@ -4816,10 +4816,10 @@
             "time_range": [3, 11],
             "type": "float",
             "missing": 27317,
-            "mean": 0.063338,
-            "sd": 0.187748,
+            "mean": 0.062659,
+            "sd": 0.185211,
             "min": 0,
-            "max": 5.420293
+            "max": 5.301055
           },
           {
             "name": "mean_read_pass_rate",
@@ -4953,7 +4953,7 @@
           "url": "https://github.com/uva-bi-sdad/catchment"
         }
       },
-      "sha512": "2b911e74ad20929f6ac4ca183363ed5eb5ba907bff04a3ae7a864f37c8154a77b8bd443b62244297a1f875d9b496f2b4eae738bc962709cd466dcae592246174"
+      "sha512": "848589ea9e3cd86289b26c0a32ff592454fbffd1ae587905d495349e1d33a636f33c0ab69f164cc5617433fb99c8b4f2d005e3d165c17d91474d0426dec11941"
     }
   ]
 }
