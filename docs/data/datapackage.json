@@ -25,8 +25,8 @@
       "id_length": 12,
       "time": "time",
       "profile": "data-resource",
-      "created": "2023-02-09 07:48:45",
-      "last_modified": "2022-09-15 21:22:22",
+      "created": "2023-02-22 11:15:26",
+      "last_modified": "2023-02-22 11:15:26",
       "row_count": 111780,
       "entity_count": 9315,
       "schema": {
@@ -1000,9 +1000,9 @@
       "sha512": "910197ca940f480abd14ed4e6ba24e6675704b1f8d8f6de085a706704d262a0a8915000b5a4038bc84ea85ddfec05a7f9ae3c1581607c8daa964f4d5e468f70d"
     },
     {
-      "bytes": 101956,
+      "bytes": 101932,
       "encoding": "ISO-8859-1",
-      "md5": "b443704e79f7825462cd8e4772bedbff",
+      "md5": "e6f01d574e4aacf49d6bf3b066bd080b",
       "format": "csv",
       "name": "county",
       "filename": "county.csv.xz",
@@ -1016,8 +1016,8 @@
       "id_length": 5,
       "time": "time",
       "profile": "data-resource",
-      "created": "2023-02-09 07:48:45",
-      "last_modified": "2022-09-15 21:22:22",
+      "created": "2023-02-22 11:15:26",
+      "last_modified": "2023-02-22 11:15:26",
       "row_count": 1908,
       "entity_count": 159,
       "schema": {
@@ -1285,7 +1285,7 @@
           },
           {
             "name": "acs_postsecondary_count",
-            "duplicates": 55,
+            "duplicates": 52,
             "info": {
               "category": "Education",
               "full_name": "acs_postsecondary_count",
@@ -1310,8 +1310,8 @@
             "time_range": [0, 11],
             "type": "integer",
             "missing": 8,
-            "mean": 40770.240526,
-            "sd": 86793.535876,
+            "mean": 40782.867895,
+            "sd": 86801.292802,
             "min": 698,
             "max": 633775
           },
@@ -1342,8 +1342,8 @@
             "time_range": [0, 11],
             "type": "float",
             "missing": 8,
-            "mean": 53.972802,
-            "sd": 12.025227,
+            "mean": 53.970181,
+            "sd": 12.02392,
             "min": 24.402848,
             "max": 93.302296
           },
@@ -2004,12 +2004,12 @@
           "url": "https://github.com/uva-bi-sdad/catchment"
         }
       },
-      "sha512": "fa1c8b56dd0e233297a0d6f9c8d3a90223a2c3a4160ddda0970d43ba4072bc700782af01638f62b09c0cde5605cf6d99548588eaccc22a0d8cbee5f6c6a3243e"
+      "sha512": "714c365e68379bb3da2fad0b0d4f9b8371de9bb2c1609a926593ce6cf2d66e5358965c566abfab9e4f5cc04ca392b73a26a7006074d1985798dbb9fe3f7bd0b7"
     },
     {
-      "bytes": 28224,
+      "bytes": 28208,
       "encoding": "ISO-8859-1",
-      "md5": "11487b25a44d7fc8edca8cb7313dac1f",
+      "md5": "0436fff63d816a2e51ae8dba08afc9d5",
       "format": "csv",
       "name": "health_district",
       "filename": "health_district.csv.xz",
@@ -2023,8 +2023,8 @@
       "id_length": 8,
       "time": "time",
       "profile": "data-resource",
-      "created": "2023-02-09 07:48:45",
-      "last_modified": "2022-09-15 21:22:22",
+      "created": "2023-02-22 11:15:26",
+      "last_modified": "2023-02-22 11:15:26",
       "row_count": 444,
       "entity_count": 37,
       "schema": {
@@ -2317,8 +2317,8 @@
             "time_range": [0, 11],
             "type": "integer",
             "missing": 0,
-            "mean": 133602.84009,
-            "sd": 188926.796368,
+            "mean": 133630.934685,
+            "sd": 188920.989801,
             "min": 13398,
             "max": 1170258
           },
@@ -2349,9 +2349,9 @@
             "time_range": [0, 11],
             "type": "float",
             "missing": 0,
-            "mean": 59.037478,
-            "sd": 12.137004,
-            "min": 34.696215,
+            "mean": 59.034976,
+            "sd": 12.13748,
+            "min": 34.704577,
             "max": 87.471538
           },
           {
@@ -3011,7 +3011,7 @@
           "url": "https://github.com/uva-bi-sdad/catchment"
         }
       },
-      "sha512": "aa1baf0a039718d1b1b102e9f3a7756009576006ccceeeef542050d56d5a939e93c9f774dd4c7837d46c5597f837a3a718077ccdcace98de45f3d6db88075cac"
+      "sha512": "35ad9950c416bb4569e5f4f69d705be36b655d5f59f0e00aa75d34e1ccaa7674ca38eea97b7ff332a47f6a3fe27877b415d581382d545a4bf78a2d5dfd222d59"
     },
     {
       "bytes": 3136,
@@ -3030,8 +3030,8 @@
       "id_length": 7,
       "time": "time",
       "profile": "data-resource",
-      "created": "2023-02-09 07:48:45",
-      "last_modified": "2022-09-15 21:22:22",
+      "created": "2023-02-22 11:15:26",
+      "last_modified": "2023-02-22 11:15:26",
       "row_count": 1392,
       "entity_count": 116,
       "schema": {
@@ -3973,8 +3973,8 @@
       "id_length": 11,
       "time": "time",
       "profile": "data-resource",
-      "created": "2023-02-09 07:48:50",
-      "last_modified": "2022-09-15 21:22:22",
+      "created": "2023-02-22 11:15:31",
+      "last_modified": "2023-02-22 11:15:31",
       "row_count": 51408,
       "entity_count": 4284,
       "schema": {
