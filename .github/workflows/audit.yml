@@ -42,7 +42,8 @@ jobs:
           rm -rf auditor
       - name: Commit the results
         run: |
-          git config --local user.name "robot"
+          git config --local user.email "actions@github.com"
+          git config --local user.name "GitHub Actions"
           git add .
           git commit -m "Automated manifest update"
       - name: Push changes # push the output folder to your repo
