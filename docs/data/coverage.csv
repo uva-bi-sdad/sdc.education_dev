@@ -1,12 +1,18 @@
 "","metadata","block_group","county","health_district","school_district","tract"
 "acs_postsecondary_count",0,0,1900,444,0,42556
 "acs_postsecondary_percent",0,0,1900,444,0,42556
+"average_years_schooling",0,89107,1423,333,0,32151
+"average_years_schooling_female",0,89107,1423,333,0,32151
+"average_years_schooling_male",0,89107,1423,333,0,32151
 "daycare_capacity",0,5951,133,35,0,2186
 "daycare_min_drivetime",0,5951,133,35,0,2186
 "daycare_over_4_per_1k",0,5951,133,35,0,2186
 "daycare_per_1k",0,5951,133,35,0,2186
 "daycare_under_10_per_1k",0,5951,133,35,0,2186
-"ID",0,111780,1908,444,1392,51408
+"EduGini",0,89107,1423,333,0,32151
+"EduGini_female",0,89107,1423,333,0,32151
+"EduGini_male",0,89107,1423,333,0,32151
+"ID",0,147204,1908,444,1392,51468
 "mean_read_pass_rate",0,0,254,70,232,0
 "median_read_pass_rate",0,0,254,70,232,0
 "schools_2year_min_drivetime",0,66032,1242,315,0,24091
@@ -18,4 +24,4 @@
 "schools_2year_with_science_program_per_100k",0,66032,1242,315,0,24091
 "schools_under2year_min_drivetime",0,66032,1242,315,0,24091
 "schools_under2year_per_100k",0,66032,1242,315,0,24091
-"time",0,111780,1908,444,1392,51408
+"time",0,147204,1908,444,1392,51468
