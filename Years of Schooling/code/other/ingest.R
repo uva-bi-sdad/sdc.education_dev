@@ -14,40 +14,6 @@ names(missing_districts) <- missing_districts
 states <- c("DC", "MD", "VA")
 years <- 2013:2021
 
-# download and load maps
-entity_info <- c(
-  lapply(va_id_map$district, function(e) list(region_name = e$name)),
-  lapply(missing_districts, function(e) list(region_name = e))
-)
-for (location in tolower(states)) {
-  for (year in c(2020, 2010)) {
-    for (level in list(c("Block%20Group", "census_block_groups"), c("Tract", "census_tracts"), c("County", "counties"))) {
-      name <- paste0(location, "_geo_census_cb_", year, "_", level[[2]])
-      file <- paste0(
-        base_dir, "/original/reference_shapes/", location, "_",
-        sub("census_", "", level[[2]], fixed = TRUE), "_", year, ".geojson"
-      )
-      if (!file.exists(file)) {
-        tryCatch(download.file(paste0(
-          "https://raw.githubusercontent.com/uva-bi-sdad/sdc.geographies/main/",
-          toupper(location), "/Census%20Geographies/", level[[1]], "/", year,
-          "/data/distribution/", name, ".geojson"
-        ), file), error = function(e) NULL)
-      }
-      if (file.exists(file)) {
-        d <- jsonlite::read_json(file)
-        for (e in d$features) {
-          if (e$properties$geoid %in% names(entity_info)) e$properties$year <- "both"
-          entity_info[[e$properties$geoid]] <- e$properties
-        }
-      }
-    }
-  }
-}
-entity_names <- unlist(lapply(entity_info, "[[", "region_name"))
-entity_names <- entity_names[!grepl(", NA", entity_names, fixed = TRUE)]
-entity_year <- vapply(entity_info, function(e) if (length(e$year)) e$year else "both", "")
-
 vars <- c(
   "1.m_0" = "B15002_003",
   "2.m_2.5" = "B15002_004",
@@ -111,7 +77,8 @@ data <- do.call(rbind, lapply(states, function(state) {
         variables = vars,
         year = year,
         state = state,
-        output = "wide"
+        output = "wide",
+        save = TRUE
       )
 
       # overall
@@ -159,14 +126,11 @@ data <- do.call(rbind, lapply(states, function(state) {
         d$average_years_schooling_male_error - d$average_years_schooling_male
       )
 
-      d <- d[d$GEOID %in% names(entity_names), c("GEOID", base_vars, error_vars)]
-      d <- d[entity_names[d$GEOID] != (if (year > 2019) 2010 else 2020), ]
-      d$region_type <- layer
-      d$region_name <- entity_names[d$GEOID]
+      d <- d[, c("GEOID", base_vars, error_vars)]
       d$year <- year
       n <- nrow(d)
       list(wide = d, tall = list(cbind(
-        d[, c("GEOID", "region_type", "region_name", "year")],
+        d[, c("GEOID", "year")],
         measure = rep(base_vars, each = n),
         value = unlist(d[, base_vars], use.names = FALSE),
         moe = unlist(d[, error_vars], use.names = FALSE)
@@ -185,8 +149,6 @@ data <- do.call(rbind, lapply(states, function(state) {
             id <- e$GEOID[[1]]
             data.frame(
               GEOID = id,
-              region_type = "health district",
-              region_name = entity_names[[id]],
               measure = base_vars,
               year = year,
               value = colMeans(e[, base_vars]),
@@ -200,4 +162,4 @@ data <- do.call(rbind, lapply(states, function(state) {
 }))
 colnames(data) <- tolower(colnames(data))
 
-vroom::vroom_write(data, paste0(base_dir, "/distribution/acs.csv.xz"), ",")
+vroom::vroom_write(data, paste0(base_dir, "/other/acs.csv.xz"), ",")
