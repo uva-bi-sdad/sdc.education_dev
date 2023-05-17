@@ -16,7 +16,7 @@ const site = {"settings":{"polygon_outline":0.5,"color_scale_center":"median","d
 <script type="application/javascript" src="https://cdn.plot.ly/plotly-2.20.0.min.js" integrity="sha384-lqNbLAc8irUVsiXijo8d5LY0Ecc43bEe85kyAJgdi+CAvmBPO/L1SWp6EUxChKM/" crossorigin="anonymous" async></script>
 <link href="https://uva-bi-sdad.github.io/community/dist/css/community.v1.min.css" rel="preload" as="style" media="all" onload="this.onload=null;this.rel='stylesheet'">
 <script type="application/javascript" src="https://uva-bi-sdad.github.io/community/dist/js/community.v1.min.js" async></script>
-<meta name="generator" content="community v0.0.1.200" />
+<meta name="generator" content="community v0.0.1.201" />
 </head>
 <body>
 <div id="site_wrap" style="visibility: hidden; position: absolute; height: 100%; left: 0; right: 0">
@@ -25,22 +25,22 @@ const site = {"settings":{"polygon_outline":0.5,"color_scale_center":"median","d
 <div class="col-4">
 <div class="row">
 <div class="row">
-<div class="auto-output text-display" auto-type="info" id="info0"></div>
+<div class="auto-output text-display" data-autoType="info" id="info0"></div>
 </div>
 <div class="row">
 <div class="wrapper button-wrapper">
-<button type="button" auto-type="button" class="auto-input btn btn-full" id="Download" target="export">Download</button>
+<button type="button" data-autoType="button" class="auto-input btn btn-full" id="Download" data-target="export">Download</button>
 </div>
 </div>
 <div class="row">
-<div class="auto-output text-display" auto-type="info" id="info1"></div>
+<div class="auto-output text-display" data-autoType="info" id="info1"></div>
 </div>
 <div class="row">
 <div class="row">
 <div class="col">
 <div class="wrapper select-wrapper">
 <div class="form-floating">
-<select class="auto-input form-select" auto-type="select" id="selected_variable" auto-options="variables" default="-1" subset="filtered" selection-subset="full_filter">
+<select class="auto-input form-select" data-autoType="select" id="selected_variable" data-optionSource="variables" data-default="-1" data-subset="filtered" data-selectionSubset="full_filter">
 </select>
 <label for="selected_variable">Variable</label>
 </div>
@@ -48,7 +48,7 @@ const site = {"settings":{"polygon_outline":0.5,"color_scale_center":"median","d
 </div>
 <div class="col-1">
 <div class="wrapper text-wrapper form-floating">
-<input type="number" id="selected_time" default="max" min="filter.time_min" max="filter.time_max" class="form-control auto-input" auto-type="number"><label for="selected_time">Time</label>
+<input type="number" id="selected_time" data-default="max" min="filter.time_min" max="filter.time_max" class="form-control auto-input" data-autoType="number"><label for="selected_time">Time</label>
 </div>
 </div>
 </div>
@@ -60,7 +60,7 @@ const site = {"settings":{"polygon_outline":0.5,"color_scale_center":"median","d
 <div class="legend-scale"><span class="na"></span></div>
 <div class="legend-summary"><p>NA</p></div>
 </div>
-<div id="main_legend" auto-type="legend" class="auto-output legend">
+<div id="main_legend" data-autoType="legend" class="auto-output legend">
 <div class="legend-ticks"></div>
 <div class="legend-scale"></div>
 <div class="legend-summary"></div>
@@ -68,17 +68,17 @@ const site = {"settings":{"polygon_outline":0.5,"color_scale_center":"median","d
 </div>
 </div>
 <div class="row">
-<div class="auto-output text-display" auto-type="info" id="info4"></div>
+<div class="auto-output text-display" data-autoType="info" id="info4"></div>
 </div>
 <div class="row">
-<div class="auto-output text-display" auto-type="info" id="info5"></div>
+<div class="auto-output text-display" data-autoType="info" id="info5"></div>
 </div>
 </div>
 </div>
 <div class="col">
 <div class="col">
-<div class="auto-output leaflet" id="main_map" auto-type="map"></div>
-<div class="plotly-wrap"><div class="auto-output plotly" x="time" y="selected_variable" id="main_plot" auto-type="plotly"></table></div></div>
+<div class="auto-output leaflet" id="main_map" data-autoType="map"></div>
+<div class="plotly-wrap"><div class="auto-output plotly" data-x="time" data-y="selected_variable" id="main_plot" data-autoType="plotly"></table></div></div>
 </div>
 </div>
 </div>
