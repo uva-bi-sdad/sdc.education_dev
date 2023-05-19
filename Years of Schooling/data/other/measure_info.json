@@ -14,7 +14,7 @@
       "doi": "10.2139/ssrn.2134646"
     }
   },
-  "average_years_schooling": {
+  "average_years_schooling_rework": {
     "category": "Education",
     "data_type": "digit",
     "equity_category": "Status",
@@ -22,7 +22,7 @@
     "long_name": "Average Years of Schooling among Adults",
     "measure_type": "average",
     "short_description": "Average years of schooling among adults age 25 and older.",
-    "short_name": "Years of Schooling",
+    "short_name": "Years of Schooling (rework)",
     "sources": [
       {
         "name": "U.S. Census, American Community Survey",

@@ -2,12 +2,18 @@
 "acs_postsecondary_count",1,0,1900,444,42612
 "acs_postsecondary_percent",1,0,1900,444,42612
 "average_years_schooling",1,0,0,0,13005
+"average_years_schooling_female",1,89152,1423,333,32151
+"average_years_schooling_male",1,89152,1423,333,32151
+"average_years_schooling_rework",1,89152,1423,333,32151
 "daycare_capacity",1,5955,133,35,2190
 "daycare_min_drivetime",1,5955,133,35,2190
 "daycare_over_4_per_1k",1,5955,133,35,2190
 "daycare_per_1k",1,5955,133,35,2190
 "daycare_under_10_per_1k",1,5955,133,35,2190
-"ID",0,111780,1908,444,51468
+"EduGini",1,89152,1423,333,32151
+"EduGini_female",1,89152,1423,333,32151
+"EduGini_male",1,89152,1423,333,32151
+"ID",0,147264,1908,444,51468
 "mean_read_pass_rate",1,0,254,70,0
 "median_read_pass_rate",1,0,254,70,0
 "schools_2year_min_drivetime",1,66032,1242,315,24091
@@ -19,4 +25,4 @@
 "schools_2year_with_science_program_per_100k",1,66032,1242,315,24091
 "schools_under2year_min_drivetime",1,66032,1242,315,24091
 "schools_under2year_per_100k",1,66032,1242,315,24091
-"time",0,111780,1908,444,51468
+"time",0,147264,1908,444,51468

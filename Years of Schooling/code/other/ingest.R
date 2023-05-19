@@ -51,6 +51,7 @@ vars <- c(
 base_vars <- paste0(
   rep(c("average_years_schooling", "EduGini"), each = 3), c("", "_female", "_male")
 )
+base_vars[1] <- paste0(base_vars[1], "_rework")
 error_vars <- paste0(base_vars, "_error")
 sv <- list(
   f = grep("f", names(vars), value = TRUE),
@@ -85,7 +86,7 @@ data <- do.call(rbind, lapply(states, function(state) {
       d_all <- d[, paste0(sv$f, "E")] + d[, paste0(sv$m, "E")]
       total <- rowSums(d_all)
       total[total == 0] <- 1
-      d$average_years_schooling <- (as.matrix(d_all) %*% y) / total
+      d$average_years_schooling_rework <- (as.matrix(d_all) %*% y) / total
       d$EduGini <- Gini(d$average_years_schooling, d_all / total)
       d_all <- d_all + sqrt(
         (d[, paste0(sv$f, "M")] / 1.645)^2 + (d[, paste0(sv$m, "M")] / 1.645)^2

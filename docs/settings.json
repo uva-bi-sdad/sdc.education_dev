@@ -35,6 +35,7 @@
             "health_district"
         ],
         "variables": {},
+        "entity_info": {},
         "files": [
             "block_group.csv.xz",
             "tract.csv.xz",
@@ -43,50 +44,71 @@
         ]
     },
     "dataviews": {
-        "default_view": {
+        "primary_view": {
             "palette": "",
             "y": "selected_variable",
-            "time_agg": "selected_time",
+            "x": "selected_year",
+            "time_agg": "selected_year",
             "time_filters": [],
-            "dataset": "shapes"
+            "dataset": "shapes",
+            "ids": "selected_region"
         }
     },
     "info": {
-        "info0": {
+        "variable_info_pane": {
             "title": "variables.short_name",
             "body": [],
             "default": [],
             "floating": false,
+            "dataview": "primary_view",
             "variable_info": false
         },
-        "info1": {
+        "info12": {
             "title": "",
             "body": [
                 {
                     "name": "",
-                    "value": "variables.sources",
+                    "value": "summary",
                     "style": "table"
                 }
             ],
             "default": [],
             "floating": false,
+            "dataview": "primary_view",
             "variable_info": false
         },
-        "info4": {
+        "info13": {
+            "title": "Filters",
+            "body": [
+                {
+                    "name": "",
+                    "value": "filter",
+                    "style": "table"
+                }
+            ],
+            "default": [],
+            "floating": false,
+            "dataview": "primary_view",
+            "variable_info": false
+        },
+        "info14": {
             "title": "features.name",
             "body": [],
             "default": {
-                "body": "Hover over output elements for more information."
+                "title": "Entire Region",
+                "body": "Hover over or select a region for more information."
             },
             "floating": false,
+            "dataview": "primary_view",
             "subto": [
                 "main_map",
                 "main_plot",
+                "rank_table",
                 "main_legend"
             ],
             "variable_info": false
         },
-        "info5": {
+        "info15": {
             "title": "",
             "body": [
                 {
@@ -102,20 +124,39 @@
             ],
             "default": [],
             "floating": false,
+            "dataview": "primary_view",
             "subto": [
                 "main_map",
                 "main_plot",
+                "rank_table",
                 "main_legend"
             ],
             "variable_info": false
         }
     },
     "button": {
-        "Download": {
+        "DownloadAllData": {
             "effects": "export",
             "dataview": {},
             "query": {
-                "include": "selected_variable"
+                "features": {
+                    "geoid": "id",
+                    "name": "name"
+                }
+            },
+            "api": false
+        },
+        "Download": {
+            "effects": "export",
+            "dataview": "primary_view",
+            "query": {
+                "include": "selected_variable",
+                "features": {
+                    "geoid": "id",
+                    "name": "name"
+                },
+                "table_format": "export_table_format",
+                "file_format": "export_file_format"
             },
             "api": false
         }
@@ -178,16 +219,18 @@
             ],
             "subto": [
                 "main_map",
+                "rank_table",
                 "main_legend"
             ]
         }
     },
     "legend": {
         "main_legend": {
-            "palette": "",
+            "palette": "settings.palette",
             "subto": [
                 "main_map",
-                "main_plot"
+                "main_plot",
+                "rank_table"
             ]
         }
     },
@@ -210,7 +253,7 @@
         "leaflet": {
             "name": "Leaflet",
             "url": "https://leafletjs.com",
-            "version": "1.9.3",
+            "version": "1.9.4",
             "description": "A JS library for interactive maps"
         },
         "Stamen toner-light": {
@@ -227,6 +270,11 @@
             "name": "OpenStreetMap",
             "url": "https://www.openstreetmap.org/copyright"
         },
+        "datatables": {
+            "name": "DataTables",
+            "url": "https://datatables.net",
+            "version": "1.13.4"
+        },
         "plotly": {
             "name": "Plotly",
             "url": "https://plotly.com/javascript/getting-started",
@@ -237,175 +285,191 @@
         "main_map": {
             "shapes": [
                 {
-                    "name": "block_group",
-                    "time": 2010.0,
-                    "url": "map_2010.geojson",
+                    "name": "health_district",
+                    "url": "https://raw.githubusercontent.com/uva-bi-sdad/sdc.geographies/main/VA/State%20Geographies/Health%20Districts/2020/data/distribution/va_geo_vhd_2020_health_districts.geojson",
                     "id_property": "geoid"
                 },
                 {
                     "name": "block_group",
-                    "time": 2020.0,
-                    "url": "map_2020.geojson",
-                    "id_property": "geoid"
+                    "time": "2013",
+                    "url": "maps/bg_2013.geojson",
+                    "id_property": "GEOID"
                 },
                 {
-                    "name": "tract",
-                    "time": 2010.0,
-                    "url": "https://raw.githubusercontent.com/uva-bi-sdad/sdc.geographies/main/VA/Census%20Geographies/Tract/2010/data/distribution/va_geo_census_cb_2010_census_tracts.geojson",
-                    "id_property": "geoid"
+                    "name": "block_group",
+                    "time": "2014",
+                    "url": "maps/bg_2014.geojson",
+                    "id_property": "GEOID"
+                },
+                {
+                    "name": "block_group",
+                    "time": "2015",
+                    "url": "maps/bg_2015.geojson",
+                    "id_property": "GEOID"
+                },
+                {
+                    "name": "block_group",
+                    "time": "2016",
+                    "url": "maps/bg_2016.geojson",
+                    "id_property": "GEOID"
+                },
+                {
+                    "name": "block_group",
+                    "time": "2017",
+                    "url": "maps/bg_2017.geojson",
+                    "id_property": "GEOID"
+                },
+                {
+                    "name": "block_group",
+                    "time": "2018",
+                    "url": "maps/bg_2018.geojson",
+                    "id_property": "GEOID"
+                },
+                {
+                    "name": "block_group",
+                    "time": "2019",
+                    "url": "maps/bg_2019.geojson",
+                    "id_property": "GEOID"
+                },
+                {
+                    "name": "block_group",
+                    "time": "2020",
+                    "url": "maps/bg_2020.geojson",
+                    "id_property": "GEOID"
+                },
+                {
+                    "name": "block_group",
+                    "time": "2021",
+                    "url": "maps/bg_2021.geojson",
+                    "id_property": "GEOID"
                 },
                 {
                     "name": "county",
-                    "time": 2010.0,
-                    "url": "https://raw.githubusercontent.com/uva-bi-sdad/sdc.geographies/main/VA/Census%20Geographies/County/2010/data/distribution/va_geo_census_cb_2010_counties.geojson",
-                    "id_property": "geoid"
-                },
-                {
-                    "name": "tract",
-                    "time": 2020.0,
-                    "url": "https://raw.githubusercontent.com/uva-bi-sdad/sdc.geographies/main/VA/Census%20Geographies/Tract/2020/data/distribution/va_geo_census_cb_2020_census_tracts.geojson",
-                    "id_property": "geoid"
+                    "time": "2013",
+                    "url": "maps/county_2013.geojson",
+                    "id_property": "GEOID"
                 },
                 {
                     "name": "county",
-                    "time": 2020.0,
-                    "url": "https://raw.githubusercontent.com/uva-bi-sdad/sdc.geographies/main/VA/Census%20Geographies/County/2020/data/distribution/va_geo_census_cb_2020_counties.geojson",
-                    "id_property": "geoid"
+                    "time": "2014",
+                    "url": "maps/county_2014.geojson",
+                    "id_property": "GEOID"
+                },
+                {
+                    "name": "county",
+                    "time": "2015",
+                    "url": "maps/county_2015.geojson",
+                    "id_property": "GEOID"
+                },
+                {
+                    "name": "county",
+                    "time": "2016",
+                    "url": "maps/county_2016.geojson",
+                    "id_property": "GEOID"
+                },
+                {
+                    "name": "county",
+                    "time": "2017",
+                    "url": "maps/county_2017.geojson",
+                    "id_property": "GEOID"
+                },
+                {
+                    "name": "county",
+                    "time": "2018",
+                    "url": "maps/county_2018.geojson",
+                    "id_property": "GEOID"
+                },
+                {
+                    "name": "county",
+                    "time": "2019",
+                    "url": "maps/county_2019.geojson",
+                    "id_property": "GEOID"
+                },
+                {
+                    "name": "county",
+                    "time": "2020",
+                    "url": "maps/county_2020.geojson",
+                    "id_property": "GEOID"
+                },
+                {
+                    "name": "county",
+                    "time": "2021",
+                    "url": "maps/county_2021.geojson",
+                    "id_property": "GEOID"
+                },
+                {
+                    "name": "tract",
+                    "time": "2013",
+                    "url": "maps/tract_2013.geojson",
+                    "id_property": "GEOID"
+                },
+                {
+                    "name": "tract",
+                    "time": "2014",
+                    "url": "maps/tract_2014.geojson",
+                    "id_property": "GEOID"
+                },
+                {
+                    "name": "tract",
+                    "time": "2015",
+                    "url": "maps/tract_2015.geojson",
+                    "id_property": "GEOID"
+                },
+                {
+                    "name": "tract",
+                    "time": "2016",
+                    "url": "maps/tract_2016.geojson",
+                    "id_property": "GEOID"
+                },
+                {
+                    "name": "tract",
+                    "time": "2017",
+                    "url": "maps/tract_2017.geojson",
+                    "id_property": "GEOID"
+                },
+                {
+                    "name": "tract",
+                    "time": "2018",
+                    "url": "maps/tract_2018.geojson",
+                    "id_property": "GEOID"
+                },
+                {
+                    "name": "tract",
+                    "time": "2019",
+                    "url": "maps/tract_2019.geojson",
+                    "id_property": "GEOID"
+                },
+                {
+                    "name": "tract",
+                    "time": "2020",
+                    "url": "maps/tract_2020.geojson",
+                    "id_property": "GEOID"
+                },
+                {
+                    "name": "tract",
+                    "time": "2021",
+                    "url": "maps/tract_2021.geojson",
+                    "id_property": "GEOID"
                 }
             ],
-            "overlays": [
-                {
-                    "variable": "schools_2year_per_100k",
-                    "source": [],
-                    "filter": {
-                        "feature": "ICLEVEL",
-                        "operator": "=",
-                        "value": 2.0
-                    }
-                },
-                {
-                    "variable": "schools_under2year_per_100k",
-                    "source": [],
-                    "filter": {
-                        "feature": "ICLEVEL",
-                        "operator": "=",
-                        "value": 3.0
-                    }
-                },
-                {
-                    "variable": "schools_2year_min_drivetime",
-                    "source": [],
-                    "filter": {
-                        "feature": "ICLEVEL",
-                        "operator": "=",
-                        "value": 2.0
-                    }
-                },
-                {
-                    "variable": "schools_under2year_min_drivetime",
-                    "source": [],
-                    "filter": {
-                        "feature": "ICLEVEL",
-                        "operator": "=",
-                        "value": 3.0
-                    }
-                },
-                {
-                    "variable": "schools_2year_with_biomedical_program_per_100k",
-                    "source": [],
-                    "filter": [
-                        {
-                            "feature": "ICLEVEL",
-                            "operator": "=",
-                            "value": 2.0
-                        },
-                        {
-                            "feature": "biomedical",
-                            "operator": "=",
-                            "value": 1.0
-                        }
-                    ]
-                },
-                {
-                    "variable": "schools_2year_with_computer_program_per_100k",
-                    "source": [],
-                    "filter": [
-                        {
-                            "feature": "ICLEVEL",
-                            "operator": "=",
-                            "value": 2.0
-                        },
-                        {
-                            "feature": "computer",
-                            "operator": "=",
-                            "value": 1.0
-                        }
-                    ]
-                },
-                {
-                    "variable": "schools_2year_with_engineering_program_per_100k",
-                    "source": [],
-                    "filter": [
-                        {
-                            "feature": "ICLEVEL",
-                            "operator": "=",
-                            "value": 2.0
-                        },
-                        {
-                            "feature": "engineering",
-                            "operator": "=",
-                            "value": 1.0
-                        }
-                    ]
-                },
-                {
-                    "variable": "schools_2year_with_physical_program_per_100k",
-                    "source": [],
-                    "filter": [
-                        {
-                            "feature": "ICLEVEL",
-                            "operator": "=",
-                            "value": 2.0
-                        },
-                        {
-                            "feature": "physical",
-                            "operator": "=",
-                            "value": 1.0
-                        }
-                    ]
-                },
-                {
-                    "variable": "schools_2year_with_science_program_per_100k",
-                    "source": [],
-                    "filter": [
-                        {
-                            "feature": "ICLEVEL",
-                            "operator": "=",
-                            "value": 2.0
-                        },
-                        {
-                            "feature": "science",
-                            "operator": "=",
-                            "value": 1.0
-                        }
-                    ]
-                }
-            ],
+            "overlays": {},
             "options": {
                 "attributionControl": false,
                 "scrollWheelZoom": false,
-                "height": "500px",
+                "center": [
+                    38.0,
+                    -79.5
+                ],
+                "zoom": 7.0,
+                "height": "430px",
                 "zoomAnimation": "settings.map_zoom_animation",
                 "overlays_from_measures": true,
                 "subto": [
                     "main_plot",
+                    "rank_table",
                     "main_legend"
                 ],
-                "center": [
-                    40.0,
-                    -95.0
-                ],
-                "zoom": 4.0
+                "background_shapes": "county"
             },
             "tiles": {
                 "light": {
@@ -425,31 +489,15 @@
                 {
                     "condition": [
                         {
-                            "id": "selected_variable",
-                            "type": "=",
-                            "value": "mean_read_pass_rate",
+                            "id": "selected_county",
+                            "type": "",
+                            "value": "",
                             "any": false
-                        }
-                    ],
-                    "value": "county"
-                },
-                {
-                    "condition": [
+                        },
                         {
-                            "id": "selected_variable",
+                            "id": "shape_type",
                             "type": "=",
-                            "value": "median_read_pass_rate",
-                            "any": false
-                        }
-                    ],
-                    "value": "county"
-                },
-                {
-                    "condition": [
-                        {
-                            "id": "selected_variable",
-                            "type": "=",
-                            "value": "acs_postsecondary_count",
+                            "value": "county",
                             "any": false
                         }
                     ],
@@ -458,28 +506,239 @@
                 {
                     "condition": [
                         {
-                            "id": "selected_variable",
-                            "type": "=",
-                            "value": "acs_postsecondary_percent",
+                            "id": "selected_tract",
+                            "type": "",
+                            "value": "",
                             "any": false
                         }
                     ],
-                    "value": "tract"
-                },
-                {
-                    "condition": [
-                        {
-                            "id": "selected_variable",
-                            "type": "=",
-                            "value": "average_years_schooling",
-                            "any": false
-                        }
-                    ],
-                    "value": "tract"
+                    "value": "block_group"
                 }
             ],
-            "default": "block_group",
+            "default": "shape_type",
+            "display": {
+                "health_district": "Health Districts",
+                "county": "Counties",
+                "tract": "Census Tracts",
+                "block_group": "Block Groups"
+            }
+        },
+        {
+            "id": "region_select",
+            "states": [
+                {
+                    "condition": [
+                        {
+                            "id": "shapes",
+                            "type": "=",
+                            "value": "county",
+                            "any": false
+                        }
+                    ],
+                    "value": "selected_county"
+                }
+            ],
+            "default": "selected_tract",
+            "display": []
+        },
+        {
+            "id": "selected_region",
+            "states": [
+                {
+                    "condition": [
+                        {
+                            "id": "selected_tract",
+                            "type": "",
+                            "value": "",
+                            "any": false
+                        }
+                    ],
+                    "value": "selected_tract"
+                }
+            ],
+            "default": "selected_county",
+            "display": []
+        },
+        {
+            "id": "tract_subset",
+            "states": [
+                {
+                    "condition": [
+                        {
+                            "id": "selected_county",
+                            "type": "",
+                            "value": "",
+                            "any": false
+                        }
+                    ],
+                    "value": "siblings"
+                }
+            ],
+            "default": "full_filter",
             "display": []
         }
-    ]
+    ],
+    "rules": [
+        {
+            "condition": [
+                {
+                    "id": "selected_tract",
+                    "type": "!",
+                    "value": "",
+                    "any": false
+                }
+            ],
+            "effects": {
+                "lock": "sec31"
+            }
+        },
+        {
+            "condition": [
+                {
+                    "id": "shapes",
+                    "type": "=",
+                    "value": "tract",
+                    "any": true
+                },
+                {
+                    "id": "shapes",
+                    "type": "=",
+                    "value": "block_group",
+                    "any": true
+                }
+            ],
+            "effects": {
+                "display": "sec32"
+            }
+        }
+    ],
+    "text": {
+        "text5": {
+            "text": [
+                {
+                    "button": {
+                        "b1": {
+                            "text": [
+                                "Entire Region"
+                            ],
+                            "type": "reset",
+                            "target": [
+                                "selected_county",
+                                "selected_tract"
+                            ]
+                        }
+                    },
+                    "text": "b1"
+                },
+                {
+                    "condition": [
+                        {
+                            "id": "selected_county",
+                            "type": "",
+                            "value": "",
+                            "any": false
+                        }
+                    ],
+                    "button": {
+                        "b1": {
+                            "text": [
+                                "",
+                                "selected_county"
+                            ],
+                            "type": "reset",
+                            "target": "selected_tract"
+                        }
+                    },
+                    "text": [
+                        " > ",
+                        "b1"
+                    ]
+                },
+                {
+                    "condition": [
+                        {
+                            "id": "selected_tract",
+                            "type": "",
+                            "value": "",
+                            "any": false
+                        }
+                    ],
+                    "text": [
+                        " > ",
+                        "selected_tract"
+                    ]
+                }
+            ]
+        },
+        "text6": {
+            "text": [
+                [
+                    {
+                        "text": "shapes",
+                        "condition": [
+                            {
+                                "id": "default",
+                                "type": "",
+                                "value": "",
+                                "any": false
+                            }
+                        ]
+                    },
+                    {
+                        "text": [
+                            "selected_region",
+                            " ",
+                            "shapes"
+                        ],
+                        "condition": [
+                            {
+                                "id": "selected_region",
+                                "type": "",
+                                "value": "",
+                                "any": false
+                            }
+                        ]
+                    }
+                ]
+            ]
+        }
+    },
+    "combobox": {
+        "selected_county": {
+            "strict": true,
+            "search": true
+        },
+        "selected_tract": {
+            "strict": true,
+            "search": true
+        },
+        "selected_variable": {
+            "strict": true,
+            "search": true,
+            "accordion": true,
+            "group": "category"
+        }
+    },
+    "datatable": {
+        "rank_table": {
+            "info": false,
+            "searching": false,
+            "scrollY": 300.0,
+            "dom": "<'row't>",
+            "paging": true,
+            "scrollX": 500.0,
+            "scrollCollapse": true,
+            "scroller": true,
+            "deferRender": true,
+            "variables": "selected_variable",
+            "subto": [
+                "main_map",
+                "main_plot",
+                "main_legend"
+            ],
+            "single_variable": true,
+            "wide": true
+        }
+    },
+    "aggregated": false
 }
