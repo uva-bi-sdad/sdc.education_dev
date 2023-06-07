@@ -2,13 +2,16 @@ base_dir <- "Years of Schooling/data"
 dir.create(paste0(base_dir, "/original/reference_shapes"), FALSE, TRUE)
 
 # get health district associations
-va_id_map <- jsonlite::read_json("https://uva-bi-sdad.github.io/community/dist/shapes/VA/entity_info.json")
+districts <- read.csv(paste0(
+  "https://raw.githubusercontent.com/uva-bi-sdad/sdc.geographies/main/",
+  "VA/State%20Geographies/Health%20Districts/2020/data/distribution/va_ct_to_hd_crosswalk.csv"
+))
 county_districts <- c(
-  unlist(lapply(va_id_map$county, "[[", "district")),
+  structure(districts$hd_geoid, names = districts$ct_geoid),
   "11001" = "11_hd_01", "24017" = "24_hd_01", "24021" = "24_hd_01",
   "24031" = "24_hd_01", "24033" = "24_hd_01"
 )
-missing_districts <- county_districts[!county_districts %in% names(va_id_map$district)]
+missing_districts <- county_districts[!county_districts %in% districts$hd_geoid]
 names(missing_districts) <- missing_districts
 
 states <- c("DC", "MD", "VA")
@@ -87,14 +90,14 @@ data <- do.call(rbind, lapply(states, function(state) {
       total <- rowSums(d_all)
       total[total == 0] <- 1
       d$average_years_schooling_rework <- (as.matrix(d_all) %*% y) / total
-      d$EduGini <- Gini(d$average_years_schooling, d_all / total)
+      d$EduGini <- Gini(d$average_years_schooling_rework, d_all / total)
       d_all <- d_all + sqrt(
         (d[, paste0(sv$f, "M")] / 1.645)^2 + (d[, paste0(sv$m, "M")] / 1.645)^2
       ) * 1.645
-      d$average_years_schooling_error <- (as.matrix(d_all) %*% y) / total
-      d$EduGini_error <- abs(Gini(d$average_years_schooling_error, d_all / total) - d$EduGini)
-      d$average_years_schooling_error <- abs(
-        d$average_years_schooling_error - d$average_years_schooling
+      d$average_years_schooling_rework_error <- (as.matrix(d_all) %*% y) / total
+      d$EduGini_error <- abs(Gini(d$average_years_schooling_rework_error, d_all / total) - d$EduGini)
+      d$average_years_schooling_rework_error <- abs(
+        d$average_years_schooling_rework_error - d$average_years_schooling_rework
       )
 
       # female population
