@@ -23,7 +23,8 @@
     "tracking": false,
     "table_autosort": true,
     "background_top": false,
-    "background_polygon_outline": 2
+    "background_polygon_outline": 2,
+    "show_empty_times": false
   },
   "metadata": {
     "url": "",
@@ -240,7 +241,7 @@
     "plotly": {
       "name": "Plotly",
       "url": "https://plotly.com/javascript/getting-started",
-      "version": "2.20.0"
+      "version": "2.24.1"
     }
   },
   "map": {
