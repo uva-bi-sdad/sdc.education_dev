@@ -1,14 +1,14 @@
 {
-  "average_years_schooling_{category.name}": {
+  "average_years_schooling_rework": {
     "data_type": "decimal",
     "aggregation_method": "mean",
     "unit": "year",
     "category": "Education",
     "equity_category": "Status",
-    "short_name": "Years of Schooling ({category})",
-    "long_name": "Average Years of Schooling Among {category}",
-    "short_description": "Average years of schooling among {category} age 25 and over.",
-    "long_description": "Average years of schooling among {category} age 25 and over. This is calculated by averaging across the education attainment variables (e.g., number of people who indicated their highest level of education is a Bachelor's degree), which are multiplied by the number of years associated with each level of education (e.g., a Bachelor's degree is associate with 16 years; as listed in Bennett, 2011, Table 1).",
+    "short_name": "Years of Schooling (rework)",
+    "long_name": "Average Years of Schooling Among Adults",
+    "short_description": "Average years of schooling among adults age 25 and over.",
+    "long_description": "Average years of schooling among adults age 25 and over. This is calculated by averaging across the education attainment variables (e.g., number of people who indicated their highest level of education is a Bachelor's degree), which are multiplied by the number of years associated with each level of education (e.g., a Bachelor's degree is associate with 16 years; as listed in Bennett, 2011, Table 1).",
     "sources": [
       {
         "name": "U.S. Census, American Community Survey",
@@ -18,36 +18,64 @@
         "url": "https://www.census.gov/programs-surveys/acs.html"
       }
     ],
-    "statement": "{category.long_name} in {region_name} have {value} years of schooling on average.",
-    "citations": "bennett11",
-    "categories": {
-      "rework": {
-        "description": "adults",
-        "long_name": "Adults"
-      },
-      "female": {
-        "short_name": "Women",
-        "long_name": "Women",
-        "default": "women"
-      },
-      "male": {
-        "short_name": "Men",
-        "long_name": "Men",
-        "default": "men"
-      }
-    }
+    "statement": "Adults in {region_name} have {value} years of schooling on average.",
+    "citations": "bennett11"
   },
-  "EduGini{category.name}": {
+  "average_years_schooling_female": {
+    "data_type": "decimal",
+    "aggregation_method": "mean",
+    "unit": "year",
+    "category": "Education",
+    "equity_category": "Status",
+    "short_name": "Years of Schooling (Women)",
+    "long_name": "Average Years of Schooling Among Women",
+    "short_description": "Average years of schooling among women age 25 and over.",
+    "long_description": "Average years of schooling among women age 25 and over. This is calculated by averaging across the education attainment variables (e.g., number of people who indicated their highest level of education is a Bachelor's degree), which are multiplied by the number of years associated with each level of education (e.g., a Bachelor's degree is associate with 16 years; as listed in Bennett, 2011, Table 1).",
+    "sources": [
+      {
+        "name": "U.S. Census, American Community Survey",
+        "location": "5-Year estimates, table B15002, via the API",
+        "location_url": "https://www.census.gov/data/developers/data-sets/acs-5year.html",
+        "date_accessed": "2023",
+        "url": "https://www.census.gov/programs-surveys/acs.html"
+      }
+    ],
+    "statement": "Women in {region_name} have {value} years of schooling on average.",
+    "citations": "bennett11"
+  },
+  "average_years_schooling_male": {
+    "data_type": "decimal",
+    "aggregation_method": "mean",
+    "unit": "year",
+    "category": "Education",
+    "equity_category": "Status",
+    "short_name": "Years of Schooling (Men)",
+    "long_name": "Average Years of Schooling Among Men",
+    "short_description": "Average years of schooling among men age 25 and over.",
+    "long_description": "Average years of schooling among men age 25 and over. This is calculated by averaging across the education attainment variables (e.g., number of people who indicated their highest level of education is a Bachelor's degree), which are multiplied by the number of years associated with each level of education (e.g., a Bachelor's degree is associate with 16 years; as listed in Bennett, 2011, Table 1).",
+    "sources": [
+      {
+        "name": "U.S. Census, American Community Survey",
+        "location": "5-Year estimates, table B15002, via the API",
+        "location_url": "https://www.census.gov/data/developers/data-sets/acs-5year.html",
+        "date_accessed": "2023",
+        "url": "https://www.census.gov/programs-surveys/acs.html"
+      }
+    ],
+    "statement": "Men in {region_name} have {value} years of schooling on average.",
+    "citations": "bennett11"
+  },
+  "EduGini": {
     "data_type": "decimal",
     "aggregation_method": "index",
     "unit": "0-1",
     "category": "Education",
     "equity_category": "Status",
-    "short_name": "Education Gini{category}",
-    "long_name": "Education Gini Coefficient{category}",
-    "short_description": "Education Gini{category}; relative distribution of education attainment.",
-    "long_description": "A measure of the relative distribution of education attainment{category}, ranging from 0 to 1, where 0 means perfectly equal education attainment: \\[\\mathrm{EduGini_{t}} = (\\mu_{t})^{-1}\\sum_{i=2}^{n_{t}}\\sum_{j=1}^{i-1}p_{t,i}|y_{t,i}-y_{t,j}|p_{t,j}\\] Where t is the year, mu is average years of schooling, p is the percentage of the population, y is the number of years associated with each level of attainment, and n is the number of such levels. This is calculated using the years of schooling variable, and the same single education-level variables (as percentages) that go into the average.",
-    "statement": "Education attainment equality{category} in {region_name} is {value} (0 = perfect).",
+    "short_name": "Education Gini",
+    "long_name": "Education Gini Coefficient",
+    "short_description": "Education Gini; relative distribution of education attainment.",
+    "long_description": "A measure of the relative distribution of education attainment, ranging from 0 to 1, where 0 means perfectly equal education attainment: \\[\\mathrm{EduGini_{t}} = (\\mu_{t})^{-1}\\sum_{i=2}^{n_{t}}\\sum_{j=1}^{i-1}p_{t,i}|y_{t,i}-y_{t,j}|p_{t,j}\\] Where t is the year, mu is average years of schooling, p is the percentage of the population, y is the number of years associated with each level of attainment, and n is the number of such levels. This is calculated using the years of schooling variable, and the same single education-level variables (as percentages) that go into the average.",
+    "statement": "Education attainment equality in {region_name} is {value} (0 = perfect).",
     "sources": [
       {
         "name": "U.S. Census, American Community Survey",
@@ -57,20 +85,51 @@
         "url": "https://www.census.gov/programs-surveys/acs.html"
       }
     ],
-    "citations": "bennett11",
-    "categories": {
-      "blank": {},
-      "_female": {
-        "default": " (Women)",
-        "description": " within the female population",
-        "statement": " among women"
-      },
-      "_male": {
-        "default": " (Men)",
-        "description": " within the male population",
-        "statement": " among men"
+    "citations": "bennett11"
+  },
+  "EduGini_female": {
+    "data_type": "decimal",
+    "aggregation_method": "index",
+    "unit": "0-1",
+    "category": "Education",
+    "equity_category": "Status",
+    "short_name": "Education Gini (Women)",
+    "long_name": "Education Gini Coefficient (Women)",
+    "short_description": "Education Gini within the female population; relative distribution of education attainment.",
+    "long_description": "A measure of the relative distribution of education attainment within the female population, ranging from 0 to 1, where 0 means perfectly equal education attainment: \\[\\mathrm{EduGini_{t}} = (\\mu_{t})^{-1}\\sum_{i=2}^{n_{t}}\\sum_{j=1}^{i-1}p_{t,i}|y_{t,i}-y_{t,j}|p_{t,j}\\] Where t is the year, mu is average years of schooling, p is the percentage of the population, y is the number of years associated with each level of attainment, and n is the number of such levels. This is calculated using the years of schooling variable, and the same single education-level variables (as percentages) that go into the average.",
+    "statement": "Education attainment equality among women in {region_name} is {value} (0 = perfect).",
+    "sources": [
+      {
+        "name": "U.S. Census, American Community Survey",
+        "location": "5-Year estimates, table B15002, via the API",
+        "location_url": "https://www.census.gov/data/developers/data-sets/acs-5year.html",
+        "date_accessed": "2023",
+        "url": "https://www.census.gov/programs-surveys/acs.html"
       }
-    }
+    ],
+    "citations": "bennett11"
+  },
+  "EduGini_male": {
+    "data_type": "decimal",
+    "aggregation_method": "index",
+    "unit": "0-1",
+    "category": "Education",
+    "equity_category": "Status",
+    "short_name": "Education Gini (Men)",
+    "long_name": "Education Gini Coefficient (Men)",
+    "short_description": "Education Gini within the male population; relative distribution of education attainment.",
+    "long_description": "A measure of the relative distribution of education attainment within the male population, ranging from 0 to 1, where 0 means perfectly equal education attainment: \\[\\mathrm{EduGini_{t}} = (\\mu_{t})^{-1}\\sum_{i=2}^{n_{t}}\\sum_{j=1}^{i-1}p_{t,i}|y_{t,i}-y_{t,j}|p_{t,j}\\] Where t is the year, mu is average years of schooling, p is the percentage of the population, y is the number of years associated with each level of attainment, and n is the number of such levels. This is calculated using the years of schooling variable, and the same single education-level variables (as percentages) that go into the average.",
+    "statement": "Education attainment equality among men in {region_name} is {value} (0 = perfect).",
+    "sources": [
+      {
+        "name": "U.S. Census, American Community Survey",
+        "location": "5-Year estimates, table B15002, via the API",
+        "location_url": "https://www.census.gov/data/developers/data-sets/acs-5year.html",
+        "date_accessed": "2023",
+        "url": "https://www.census.gov/programs-surveys/acs.html"
+      }
+    ],
+    "citations": "bennett11"
   },
   "_references": {
     "bennett11": {
