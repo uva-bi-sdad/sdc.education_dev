@@ -2,7 +2,10 @@ name: Process Data Repository
 on:
   push:
     branches:
-      - 'main'
+    - main
+  pull_request:
+    branches:
+    - main
 jobs:
   update_public_repo:
     if: github.repository == 'uva-bi-sdad/sdc.education_dev'
