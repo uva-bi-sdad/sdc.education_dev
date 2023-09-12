@@ -18,6 +18,7 @@ jobs:
           ls -la  
       - name: Pull latest git repo
         run : |
+          git checkout main
           git pull
       - name: Remove all files that do not have a distribution in its path, ignoring all files in root
         run: |
