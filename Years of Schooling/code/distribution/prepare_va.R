@@ -1,6 +1,7 @@
 library(data.table)
+source("utils/distribution/aggregate.R")
 
-dat <- fread(input = "Years of Schooling/data/working/va_tr_acs5_2017_2021_years of schooling.csv")
+dat <- fread(input = "Years of Schooling/data/working/va_tr_acs5_2017_2021_years_of_schooling.csv")
 dat20172019 <- dat[year %in% c(2017, 2018, 2019), .(geoid = as.character(geoid), year, measure, measure_type = "index", value)]
 dat20202021 <- dat[year %in% c(2020, 2021), .(geoid = as.character(geoid), year, measure, measure_type = "index", value)]
 
@@ -23,5 +24,7 @@ dat_mrg <- rbindlist(list(dat20172019_mrg, dat20202021_mrg))
 
 dat_fin <- dat_mrg[,.(geoid, measure, measure_type, region_name, region_type, value, year, moe = "")]
 
+aggregated <- aggregate(dat_fin, "tract", weight_col = "B01003_001E")
+
 # fwrite(dat_fin, "Years of Schooling/data/distribution/va_tr_acs5_2017_2021_years_of_schooling.csv")
-readr::write_csv(dat_fin, xzfile("Years of Schooling/data/distribution/va_tr_acs5_2017_2021_years_of_schooling.csv.xz", compression = 9))
+readr::write_csv(aggregated, xzfile("Years of Schooling/data/distribution/va_hdcttr_acs5_2017_2021_years_of_schooling.csv.xz", compression = 9))
