@@ -7,8 +7,8 @@ dat20202021 <- dat[year %in% c(2020, 2021), .(geoid = as.character(geoid), year,
 
 # geographies
 geo_names <- fread("https://raw.githubusercontent.com/uva-bi-sdad/sdc.metadata/master/geographies.csv")
-geo_names <- geo_names[!region_name %like% "District Of Columbia" & 
-                         !region_name %like% "Manassas Park city" & 
+geo_names <- geo_names[!region_name %like% "District Of Columbia" &
+                         !region_name %like% "Manassas Park city" &
                          !region_name %like% "Fairfax city" &
                          !region_name %like% "Alexandria city" &
                          !region_name %like% "Manassas city" &
@@ -24,7 +24,7 @@ dat_mrg <- rbindlist(list(dat20172019_mrg, dat20202021_mrg))
 
 dat_fin <- dat_mrg[,.(geoid, measure, measure_type, region_name, region_type, value, year, moe = "")]
 
-aggregated <- aggregate(dat_fin, "tract", weight_col = "B01003_001E")
+aggregated <- aggregate(dat_fin, "tract", method=sum)
 
 # fwrite(dat_fin, "Years of Schooling/data/distribution/va_tr_acs5_2017_2021_years_of_schooling.csv")
 readr::write_csv(aggregated, xzfile("Years of Schooling/data/distribution/va_hdcttr_acs5_2017_2021_years_of_schooling.csv.xz", compression = 9))
