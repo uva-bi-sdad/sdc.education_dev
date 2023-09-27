@@ -48,14 +48,10 @@
   "info": {
     "variable_info_pane": {
       "title": "variables.short_name",
-      "body": [],
-      "default": [],
-      "floating": false,
       "dataview": "primary_view",
-      "variable_info": false
+      "variable_info": true
     },
     "info12": {
-      "title": "",
       "body": [
         {
           "name": "",
@@ -63,10 +59,8 @@
           "style": "table"
         }
       ],
-      "default": [],
-      "floating": false,
       "dataview": "primary_view",
-      "variable_info": false
+      "variable_info": true
     },
     "info13": {
       "title": "Filters",
@@ -77,25 +71,20 @@
           "style": "table"
         }
       ],
-      "default": [],
-      "floating": false,
       "dataview": "primary_view",
-      "variable_info": false
+      "variable_info": true
     },
     "info14": {
       "title": "features.name",
-      "body": [],
       "default": {
         "title": "Entire Region",
         "body": "Hover over or select a region for more information."
       },
-      "floating": false,
       "dataview": "primary_view",
       "subto": ["main_map", "main_plot", "rank_table", "main_legend"],
-      "variable_info": false
+      "variable_info": true
     },
     "info15": {
-      "title": "",
       "body": [
         {
           "name": "variables.long_name",
@@ -108,24 +97,19 @@
           "style": "table"
         }
       ],
-      "default": [],
-      "floating": false,
       "dataview": "primary_view",
-      "subto": ["main_map", "main_plot", "rank_table", "main_legend"],
-      "variable_info": false
+      "subto": ["main_map", "main_plot", "rank_table", "main_legend"]
     }
   },
   "button": {
     "DownloadAllData": {
       "effects": "export",
-      "dataview": {},
       "query": {
         "features": {
           "geoid": "id",
           "name": "name"
         }
-      },
-      "api": false
+      }
     },
     "Download": {
       "effects": "export",
@@ -138,8 +122,7 @@
         },
         "table_format": "export_table_format",
         "file_format": "export_file_format"
-      },
-      "api": false
+      }
     }
   },
   "plotly": {
@@ -241,7 +224,7 @@
     "plotly": {
       "name": "Plotly",
       "url": "https://plotly.com/javascript/getting-started",
-      "version": "2.24.1"
+      "version": "2.24.2"
     }
   },
   "map": {
@@ -415,7 +398,6 @@
           "id_property": "GEOID"
         }
       ],
-      "overlays": {},
       "options": {
         "attributionControl": false,
         "scrollWheelZoom": false,
@@ -435,8 +417,7 @@
           "url": "https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png"
         }
       }
-    },
-    "_raw": []
+    }
   },
   "variables": [
     {
