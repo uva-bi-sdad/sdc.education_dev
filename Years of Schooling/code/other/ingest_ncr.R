@@ -3,6 +3,9 @@ library(data.table)
 library(dplyr)
 library(tidyr)
 
+start_yr <- 2015
+end_yr <- 2023
+
 #function for calculating ays
 get_ays <- function(acs_data, tract_geoid) {
   pop_mf <- acs_data[acs_data$GEOID==tract_geoid & acs_data$variable %in% c("B15001_001"), c("estimate")][[1]]
@@ -76,15 +79,15 @@ get_acsdata(geography = "tract",
             table = "B15001",
             state = c("VA", "MD", "DC"),
             survey = "acs5",
-            start_year = 2017,
-            end_year = 2021,
+            start_year = start_yr,
+            end_year = end_yr,
             code_ncr = code_ncr)
 
 
 
 #different years calculation
 
-for (year in c(2021, 2020, 2019, 2018, 2017)) {
+for (year in start_yr:end_yr) {
   # Get the data for the current year
   acsdata_year <- get(paste0("acsdata", year))
   
@@ -121,7 +124,7 @@ ays_df <- data.table::rbindlist(lapply(file_names, function(f) data.table::fread
 
 ##get the names and combine to get our format
 ###getting the data for VA, MD and DC
-for (year in c(2017, 2018, 2019, 2020, 2021)) {
+for (year in start_yr:end_yr) {
   
   acsdata <- get_acs(geography = "tract",
                      table = "B15001",
@@ -155,7 +158,7 @@ for (year in c(2017, 2018, 2019, 2020, 2021)) {
 #we will get files like acsdf2021,......2017
 #######
 # Create a list of data frames
-df_list <- list(acsdf2021, acsdf2020, acsdf2019, acsdf2018, acsdf2017)
+df_list <- list(acsdf2023, acsdf2022, acsdf2021, acsdf2020, acsdf2019, acsdf2018, acsdf2017)
 
 
 # Create a new list to store the new data frames
@@ -193,7 +196,7 @@ names(ays_df)[names(ays_df) == 'V2'] <- 'NAME'
 
 
 ###Creating ays_df in format
-ncr_tract_ays_2017_2021 <- data.frame(
+ncr_tract_ays_2015_2023 <- data.frame(
   geoid = ays_df$geoid,
   year = ays_df$year,
   NAME = ays_df$NAME,
@@ -203,7 +206,7 @@ ncr_tract_ays_2017_2021 <- data.frame(
 )
 
 ###Creating ays_df in format
-ncr_tract_ays_scaled_2017_2021 <- data.frame(
+ncr_tract_ays_scaled_2015_2023 <- data.frame(
   geoid = ays_df$geoid,
   year = ays_df$year,
   NAME = ays_df$NAME,
@@ -213,8 +216,8 @@ ncr_tract_ays_scaled_2017_2021 <- data.frame(
 )
 
 
-write.csv(ncr_tract_ays_2017_2021,"data/ncr_tract_ays_2017_2021.csv")
-write.csv(ncr_tract_ays_scaled_2017_2021,"data/ncr_tract_ays_scaled_2017_2021.csv")
+write.csv(ncr_tract_ays_2015_2023,"data/ncr_tract_ays_2015_2023.csv")
+write.csv(ncr_tract_ays_scaled_2015_2023,"data/ncr_tract_ays_scaled_2015_2023.csv")
 
 ##Creating long format
 
